@@ -13,20 +13,14 @@ import io.realm.annotations.PrimaryKey;
  * Created by raphaelsouza on 17-08-09.
  */
 
-public class Contact extends RealmObject {
+public class Self extends RealmObject {
     @PrimaryKey
     public long id;
 
-    public String name;
-    public byte[] image;
+    String name;
+    byte[] image;
 
-    public Contact(String name, Bitmap picture) {
-        this.id   = UUID.randomUUID().hashCode();
-        this.name = name;
-        setImage(picture);
-    }
-
-    public Contact(String name) {
+    public Self(String name) {
         this.id   = UUID.randomUUID().hashCode();
         this.name = name;
     }
