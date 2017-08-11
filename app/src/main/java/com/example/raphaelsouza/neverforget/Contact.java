@@ -26,13 +26,21 @@ public class Contact extends RealmObject {
         setImage(picture);
     }
 
+    public String getFirstName() {
+        return name.split(" ")[0];
+    }
+
     public Contact(String name) {
         this.id   = UUID.randomUUID().hashCode();
         this.name = name;
     }
 
     public Bitmap getImage() {
-        return BitmapFactory.decodeByteArray(this.image, 0, this.image.length);
+        if (image == null) {
+            return null;
+        } else {
+            return BitmapFactory.decodeByteArray(this.image, 0, this.image.length);
+        }
     }
 
     public void setImage(Bitmap bitmap) {

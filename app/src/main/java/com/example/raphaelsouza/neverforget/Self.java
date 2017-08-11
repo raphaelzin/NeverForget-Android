@@ -20,13 +20,21 @@ public class Self extends RealmObject {
     String name;
     byte[] image;
 
+    public String getFirstName() {
+        return name.split(" ")[0];
+    }
+
     public Self(String name) {
         this.id   = UUID.randomUUID().hashCode();
         this.name = name;
     }
 
     public Bitmap getImage() {
-        return BitmapFactory.decodeByteArray(this.image, 0, this.image.length);
+        if (image == null){
+            return  null;
+        } else {
+            return BitmapFactory.decodeByteArray(this.image, 0, this.image.length);
+        }
     }
 
     public void setImage(Bitmap bitmap) {
