@@ -24,6 +24,10 @@ public class Self extends RealmObject {
         return name.split(" ")[0];
     }
 
+    public  Self() {
+        this.id   = UUID.randomUUID().hashCode();
+    }
+
     public Self(String name) {
         this.id   = UUID.randomUUID().hashCode();
         this.name = name;

@@ -20,6 +20,10 @@ public class Contact extends RealmObject {
     public String name;
     public byte[] image;
 
+    public Contact() {
+        this.id   = UUID.randomUUID().hashCode();
+    }
+
     public Contact(String name, Bitmap picture) {
         this.id   = UUID.randomUUID().hashCode();
         this.name = name;

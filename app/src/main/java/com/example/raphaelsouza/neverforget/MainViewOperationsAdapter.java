@@ -30,17 +30,17 @@ public class MainViewOperationsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return operationsDAO.getContacts().findAll().size();
+        return 10;//operationsDAO.getContacts().findAll().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return operationsDAO.getContacts().findAll().get(position);
+        return null;//operationsDAO.getContacts().findAll().get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return operationsDAO.getContacts().findAll().get(position).id;
+        return 0;//operationsDAO.getContacts().findAll().get(position).id;
     }
 
     @Override
@@ -48,8 +48,8 @@ public class MainViewOperationsAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        Operation operation = (Operation) getItem(position);
-        Contact contact     = contactsDAO.get(operation.contactID);
+//        Operation operation = (Operation) getItem(position);
+//        Contact contact     = contactsDAO.get(operation.contactID);
 
         // Init views
         View rowView = inflater.inflate(R.layout.full_operation_cell, parent, false);
@@ -64,20 +64,23 @@ public class MainViewOperationsAdapter extends BaseAdapter {
         ImageView arrow = (ImageView) rowView.findViewById(R.id.arrow);
         // Init END
 
-        if (selfDAO.getSelf().getImage() != null) {
-            selfPic.setImageBitmap(selfDAO.getSelf().getImage());
-        }
+//        if (selfDAO.getSelf().getImage() != null) {
+//            selfPic.setImageBitmap(selfDAO.getSelf().getImage());
+//        }
+//
+//        if (contact.getImage() != null ) {
+//            contactPic.setImageBitmap(contact.getImage());
+//        }
 
-        if (contact.getImage() != null ) {
-            contactPic.setImageBitmap(contact.getImage());
-        }
+//        selfName.setText(selfDAO.getSelf().getFirstName());
+//        contactName.setText(contact.getFirstName());
+        selfName.setText("Raphael");
+        contactName.setText("William");
 
-        selfName.setText(selfDAO.getSelf().getFirstName());
-        contactName.setText(contact.getFirstName());
+//        amount.setText("$" + operation.amount);
+        amount.setText("$17.06");
 
-        amount.setText("$" + operation.amount);
-
-        if (operation.isDebt) {
+        if (position%2 == 0) {
             arrow.setRotation(180);
         }
 

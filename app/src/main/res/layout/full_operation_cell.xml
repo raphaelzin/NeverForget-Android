@@ -13,7 +13,7 @@
         android:layout_height="60dp"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="4dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@drawable/ic_account_circle"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/contactPicture"
@@ -21,16 +21,17 @@
 
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@mipmap/ic_launcher"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_account_circle"/>
 
     <ImageView
         android:layout_width="150dp"
         android:layout_height="90dp"
         android:adjustViewBounds="true"
         android:id="@+id/arrow"
-        android:src="@drawable/arrow"
+        android:src="@drawable/ic_arrow"
+        android:padding="10dp"
         android:contentDescription="Arrow"
 
         android:layout_alignParentTop="true"
@@ -41,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="$12.04"
-        android:textColor="#FE4847"
+        android:textColor="@color/colorContent"
         android:textSize="18sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -49,25 +50,25 @@
 
     <TextView
         android:id="@+id/selfName"
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:text="YourName"
-        android:textColor="#FE4847"
-        android:textAlignment="center"
-
         android:layout_below="@+id/selfPicture"
         android:layout_centerHorizontal="@+id/selfPicture"
-         />
+
+        android:text="Raphael"
+        android:textAlignment="center"
+        android:textColor="@color/colorContent" />
 
     <TextView
         android:id="@+id/contactName"
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:text="conName"
-        android:textColor="#FE4847"
-        android:textAlignment="center"
 
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/contactPicture" />
+        android:text="conName"
+        android:textColor="@color/colorContent"
+        android:textAlignment="center"
+        android:layout_below="@+id/contactPicture"
+        android:layout_centerHorizontal="@+id/contactPicture"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

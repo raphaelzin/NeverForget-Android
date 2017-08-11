@@ -21,6 +21,10 @@ public class Operation extends RealmObject {
     public boolean isDebt;
     public double amount;
 
+    public Operation() {
+        this.id = UUID.randomUUID().timestamp();
+    }
+
     public Operation(long contactID, String details, Date date,
                      Date paidDate, boolean isDebt, double amount) {
         this.id        = UUID.randomUUID().timestamp();

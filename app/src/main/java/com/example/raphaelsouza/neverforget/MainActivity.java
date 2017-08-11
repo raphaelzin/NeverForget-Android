@@ -1,5 +1,6 @@
 package com.example.raphaelsouza.neverforget;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,10 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import java.util.List;
 
 import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity {
+    ListView operationsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +30,20 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                addOperation();
             }
         });
+
+        MainViewOperationsAdapter adapter = new MainViewOperationsAdapter(this);
+
+        operationsList = (ListView) findViewById(R.id.list_id);
+        operationsList.setAdapter(adapter);
+
+    }
+
+    public void addOperation() {
+        Intent addOperation = new Intent(this, AddOperation.class);
+        startActivity(addOperation);
     }
 
     @Override
