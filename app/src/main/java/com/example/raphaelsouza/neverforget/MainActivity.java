@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import io.realm.Realm;
@@ -37,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
         operationsList = (ListView) findViewById(R.id.list_id);
         operationsList.setAdapter(adapter);
         Log.wtf("Count", "Operations: " + adapter.getCount());
+        operationsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+                Operation selected = (Operation) adapter.getItemAtPosition(position);
+                Log.wtf("TAG", "onItemClick: " + selected.toString() );
+                showDetailsActivity(selected);
+            }
+        });
     }
 
     public void addOperation() {
@@ -45,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(addOperation, 0);
     }
 
+    public void showDetailsActivity(Operation op) {
+//        Intent showDetails = new Intent(this,)
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

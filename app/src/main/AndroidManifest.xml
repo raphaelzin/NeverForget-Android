@@ -23,7 +23,11 @@
             android:name=".AddOperation"
             android:label="@string/title_activity_add_operation"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Contacts"></activity>
+        <activity android:name=".Contacts" />
+        <activity
+            android:name=".OperationDetails"
+            android:label="@string/title_activity_operation_details"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
