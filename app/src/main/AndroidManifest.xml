@@ -22,7 +22,8 @@
         <activity
             android:name=".AddOperation"
             android:label="@string/title_activity_add_operation"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Contacts"></activity>
     </application>
 
 </manifest>

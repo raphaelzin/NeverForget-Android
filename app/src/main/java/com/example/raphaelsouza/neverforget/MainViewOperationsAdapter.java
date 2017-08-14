@@ -74,7 +74,7 @@ public class MainViewOperationsAdapter extends BaseAdapter {
 //        }
 
 //        selfName.setText(selfDAO.getSelf().getFirstName());
-        contactName.setText(contact.getFirstName());
+        contactName.setText( contact.getFirstName() );
         selfName.setText("Raphael");
 //        contactName.setText("William");
 

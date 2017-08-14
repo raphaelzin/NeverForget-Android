@@ -3,16 +3,13 @@ package com.example.raphaelsouza.neverforget;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
-
-import java.util.List;
 
 import io.realm.Realm;
 
@@ -66,6 +63,13 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+
+        if (id == R.id.contacts)
+        {
+            Log.i("Ei!", "Go to contacts");
+            Intent contacts = new Intent(this, Contacts.class);
+            startActivityForResult(contacts, 1);
         }
 
         return super.onOptionsItemSelected(item);

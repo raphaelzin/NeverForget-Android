@@ -30,6 +30,11 @@ public class OperationDAO {
         realm.commitTransaction();
     }
 
+    public double operationsWith(long id, boolean debt) {
+        return getOperations().equalTo("contactID", id).equalTo("isDebt", debt)
+                .sum("amount").doubleValue();
+    }
+
     public void delete(final Operation operation) {
         realm.executeTransaction(new Realm.Transaction() {
             @Override

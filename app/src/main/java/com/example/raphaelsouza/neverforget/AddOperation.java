@@ -1,8 +1,10 @@
 package com.example.raphaelsouza.neverforget;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -129,8 +131,6 @@ public class AddOperation extends AppCompatActivity {
                         whenCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-
-
     }
 
     public void updateDateLabel() {
@@ -156,7 +156,14 @@ public class AddOperation extends AppCompatActivity {
 
     public void saveOperation() {
         if (name.getText().toString().isEmpty() || amount.getText().toString().isEmpty()) {
-            Log.wtf("DEU RUIM", ":( ");
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("The fields amount and name have to be filled")
+                    .setTitle("Ops, there is a problem");
+            builder.setPositiveButton("Got it", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) { }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
             return;
         }
 

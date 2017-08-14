@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_marginTop="8dp"
+    android:background="@color/colorGray"
+    android:layout_height="80dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/contactPic"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/contactName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/contactPic"
+        android:text="Contact Name"
+        android:textColor="@color/colorContent"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/totalDebt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/contactPic"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/colorContent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:textSize="18sp"
+        android:text="$1823.30" />
+
+    <TextView
+        android:id="@+id/totalCredit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/contactPic"
+        android:textColor="@color/colorContent"
+        android:textSize="18sp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="$1823.30" />
+</RelativeLayout>
