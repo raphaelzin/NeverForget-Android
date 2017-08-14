@@ -158,7 +158,7 @@ public class AddOperation extends AppCompatActivity {
         if (name.getText().toString().isEmpty() || amount.getText().toString().isEmpty()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("The fields amount and name have to be filled")
-                    .setTitle("Ops, there is a problem");
+                    .setTitle("Ops, there's a problem");
             builder.setPositiveButton("Got it", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) { }
             });

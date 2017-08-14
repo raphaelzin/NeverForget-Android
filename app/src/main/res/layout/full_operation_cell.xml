@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="90dp"
     android:padding="6dip"
-    android:background="@color/colorGray"
     android:layout_marginTop="2dp"
     android:id="@+id/fullOperationCell">
 

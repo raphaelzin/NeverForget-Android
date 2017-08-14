@@ -3,6 +3,8 @@ package com.example.raphaelsouza.neverforget;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 
+import static android.R.attr.id;
+
 /**
  * Created by raphaelsouza on 17-08-09.
  */
@@ -33,6 +35,10 @@ public class OperationDAO {
     public double operationsWith(long id, boolean debt) {
         return getOperations().equalTo("contactID", id).equalTo("isDebt", debt)
                 .sum("amount").doubleValue();
+    }
+
+    public double getTotal(boolean debt) {
+        return getOperations().equalTo("isDebt", debt).sum("amount").doubleValue();
     }
 
     public void delete(final Operation operation) {

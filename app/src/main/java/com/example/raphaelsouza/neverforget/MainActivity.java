@@ -1,6 +1,7 @@
 package com.example.raphaelsouza.neverforget;
 
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -74,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent settings = new Intent(this, SettingsActivity.class);
+            startActivityForResult(settings, 1);
         }
 
         if (id == R.id.contacts)
