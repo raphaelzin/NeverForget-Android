@@ -10,8 +10,8 @@ import io.realm.RealmQuery;
 public class OperationDAO {
     Realm realm = Realm.getDefaultInstance();
 
-    public RealmQuery<Contact> getContacts() {
-        return realm.where(Contact.class);
+    public RealmQuery<Operation> getOperations() {
+        return realm.where(Operation.class);
     }
 
     public Contact get(long id) {

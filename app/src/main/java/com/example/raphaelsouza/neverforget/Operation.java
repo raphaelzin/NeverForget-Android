@@ -20,19 +20,20 @@ public class Operation extends RealmObject {
     public Date paidDate;
     public boolean isDebt;
     public double amount;
+    public boolean paid;
 
     public Operation() {
-        this.id = UUID.randomUUID().timestamp();
+        this.id = UUID.randomUUID().hashCode();
     }
 
     public Operation(long contactID, String details, Date date,
-                     Date paidDate, boolean isDebt, double amount) {
-        this.id        = UUID.randomUUID().timestamp();
+                      boolean isDebt, double amount) {
+        this.id        = UUID.randomUUID().hashCode();
         this.contactID = contactID;
-        this.paidDate  = paidDate;
         this.details   = details;
         this.amount    = amount;
         this.isDebt    = isDebt;
         this.date      = date;
+        this.paid      = false;
     }
 }

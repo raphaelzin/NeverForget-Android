@@ -30,17 +30,17 @@ public class MainViewOperationsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 10;//operationsDAO.getContacts().findAll().size();
+        return operationsDAO.getOperations().findAll().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;//operationsDAO.getContacts().findAll().get(position);
+        return operationsDAO.getOperations().findAll().get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;//operationsDAO.getContacts().findAll().get(position).id;
+        return operationsDAO.getOperations().findAll().get(position).id;
     }
 
     @Override
@@ -48,8 +48,9 @@ public class MainViewOperationsAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-//        Operation operation = (Operation) getItem(position);
-//        Contact contact     = contactsDAO.get(operation.contactID);
+        Operation operation = (Operation) getItem(position);
+        Contact contact     = contactsDAO.get(operation.contactID);
+
 
         // Init views
         View rowView = inflater.inflate(R.layout.full_operation_cell, parent, false);
@@ -73,14 +74,14 @@ public class MainViewOperationsAdapter extends BaseAdapter {
 //        }
 
 //        selfName.setText(selfDAO.getSelf().getFirstName());
-//        contactName.setText(contact.getFirstName());
+        contactName.setText(contact.getFirstName());
         selfName.setText("Raphael");
-        contactName.setText("William");
+//        contactName.setText("William");
 
-//        amount.setText("$" + operation.amount);
-        amount.setText("$17.06");
+        amount.setText("$" + operation.amount);
+        amount.setText("$" + String.valueOf(operation.amount));
 
-        if (position%2 == 0) {
+        if (operation.isDebt) {
             arrow.setRotation(180);
         }
 

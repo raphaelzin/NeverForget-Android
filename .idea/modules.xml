@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/NeverForget.iml" filepath="$PROJECT_DIR$/NeverForget.iml" />
-      <module fileurl="file://$PROJECT_DIR$/NeverForget-Android.iml" filepath="$PROJECT_DIR$/NeverForget-Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +18,7 @@ import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity {
     ListView operationsList;
+    MainViewOperationsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +36,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MainViewOperationsAdapter adapter = new MainViewOperationsAdapter(this);
-
+        adapter = new MainViewOperationsAdapter(this);
         operationsList = (ListView) findViewById(R.id.list_id);
         operationsList.setAdapter(adapter);
-
+        Log.wtf("Count", "Operations: " + adapter.getCount());
     }
 
     public void addOperation() {
         Intent addOperation = new Intent(this, AddOperation.class);
-        startActivity(addOperation);
+//        startActivity(addOperation);
+        startActivityForResult(addOperation, 0);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,5 +69,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        adapter.notifyDataSetChanged();
     }
 }
