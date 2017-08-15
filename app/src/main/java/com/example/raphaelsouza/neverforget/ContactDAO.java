@@ -1,5 +1,7 @@
 package com.example.raphaelsouza.neverforget;
 
+import android.graphics.Bitmap;
+
 import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmQuery;
@@ -28,9 +30,15 @@ public class ContactDAO {
             return null;
     }
 
-    public void update(Contact contact) {
+    public void updatePicture(Contact contact, Bitmap picture) {
         realm.beginTransaction();
-        realm.copyToRealmOrUpdate(contact);
+        contact.setImage(picture);
+        realm.commitTransaction();
+    }
+
+    public void updateName(Contact contact, String name) {
+        realm.beginTransaction();
+        contact.name = name;
         realm.commitTransaction();
     }
 

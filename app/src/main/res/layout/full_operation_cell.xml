@@ -40,7 +40,7 @@
         android:id="@+id/amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="$12.04"
+        android:text="$"
         android:textColor="@color/colorContent"
         android:textSize="18sp"
         android:layout_alignParentTop="true"
@@ -54,7 +54,7 @@
         android:layout_below="@+id/selfPicture"
         android:layout_centerHorizontal="@+id/selfPicture"
 
-        android:text="Raphael"
+        android:text="User"
         android:textAlignment="center"
         android:textColor="@color/colorContent" />
 
@@ -63,7 +63,7 @@
         android:layout_width="70dp"
         android:layout_height="wrap_content"
 
-        android:text="conName"
+        android:text="Other"
         android:textColor="@color/colorContent"
         android:textAlignment="center"
         android:layout_below="@+id/contactPicture"

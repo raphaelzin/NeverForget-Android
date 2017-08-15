@@ -53,7 +53,12 @@ public class ContactsAdapter extends BaseAdapter {
 
         name.setText(contact.name);
 
-        contactPic.setImageResource(R.drawable.ic_account_circle);
+        if (contact.getImage() != null) {
+            contactPic.setImageBitmap(contact.getImage());
+        } else {
+            contactPic.setImageResource(R.drawable.ic_account_circle);
+        }
+
         totalDebt.setText("$" + operationDAO.operationsWith(contact.id,true));
         totalCredit.setText("$" + operationDAO.operationsWith(contact.id,false));
 

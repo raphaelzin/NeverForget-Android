@@ -21,18 +21,20 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AddOperation extends AppCompatActivity {
+
+public class AddOperationActivity extends AppCompatActivity {
     EditText name;
     EditText desc;
     EditText amount;
     EditText when;
 
-    TextView nameCell;
+    TextView contactName;
     TextView amountCell;
 
     ImageView arrow;
-    ImageView contactPic;
+    CircleImageView contactPic;
 
     Button isDebtButton;
     Button notDebitButton;
@@ -42,6 +44,7 @@ public class AddOperation extends AppCompatActivity {
 
     OperationDAO opDAO;
     ContactDAO contDAO;
+    SelfDAO selfDAO;
 
     boolean isDebt;
 
@@ -52,8 +55,9 @@ public class AddOperation extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        opDAO = new OperationDAO();
+        opDAO   = new OperationDAO();
         contDAO = new ContactDAO();
+        selfDAO = new SelfDAO();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabAdd);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -64,20 +68,27 @@ public class AddOperation extends AppCompatActivity {
             }
         });
 
-        name   = (EditText) findViewById(R.id.name);
+        name   = (EditText) findViewById(R.id.nameEditText);
         when   = (EditText) findViewById(R.id.when);
         desc   = (EditText) findViewById(R.id.description);
-        amount = (EditText) findViewById(R.id.amount);
+        amount = (EditText) findViewById(R.id.amountEditText);
 
-        nameCell   = (TextView) findViewById(R.id.contactName);
-        amountCell = (TextView) findViewById(R.id.amountCell);
+        contactName = (TextView) findViewById(R.id.contactName);
+        amountCell  = (TextView) findViewById(R.id.amount);
+
 
         arrow      = (ImageView) findViewById(R.id.arrow);
-        contactPic = (ImageView) findViewById(R.id.contactPicture);
+        contactPic = (CircleImageView) findViewById(R.id.contactPicture);
 
         isDebtButton   = (Button) findViewById(R.id.isDebt);
         notDebitButton = (Button) findViewById(R.id.notDebt);
         isDebt = true;
+
+        TextView selfName = (TextView) findViewById(R.id.selfName);
+        CircleImageView selfPic = (CircleImageView) findViewById(R.id.selfPicture);
+
+        selfName.setText(selfDAO.getSelf().name);
+        selfPic.setImageBitmap(selfDAO.getSelf().getImage());
 
         name.addTextChangedListener(new TextWatcher() {
             @Override
@@ -85,7 +96,7 @@ public class AddOperation extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                nameCell.setText(charSequence.toString().split(" ")[0]);
+                contactName.setText(charSequence.toString().split(" ")[0]);
             }
 
             @Override
@@ -125,7 +136,7 @@ public class AddOperation extends AppCompatActivity {
         when.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(AddOperation.this, date,
+                new DatePickerDialog(AddOperationActivity.this, date,
                         whenCalendar.get(Calendar.YEAR),
                         whenCalendar.get(Calendar.MONTH),
                         whenCalendar.get(Calendar.DAY_OF_MONTH)).show();

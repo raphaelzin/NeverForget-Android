@@ -1,7 +1,6 @@
 package com.example.raphaelsouza.neverforget;
 
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +16,7 @@ import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity {
     ListView operationsList;
-    MainViewOperationsAdapter adapter;
+    FullOperationsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        adapter = new MainViewOperationsAdapter(this);
+        adapter = new FullOperationsAdapter(this);
         operationsList = (ListView) findViewById(R.id.list_id);
         operationsList.setAdapter(adapter);
         Log.wtf("Count", "Operations: " + adapter.getCount());
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addOperation() {
-        Intent addOperation = new Intent(this, AddOperation.class);
+        Intent addOperation = new Intent(this, AddOperationActivity.class);
 //        startActivity(addOperation);
         startActivityForResult(addOperation, 0);
     }
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.contacts)
         {
             Log.i("Ei!", "Go to contacts");
-            Intent contacts = new Intent(this, Contacts.class);
+            Intent contacts = new Intent(this, ContactsActivity.class);
             startActivityForResult(contacts, 1);
         }
 

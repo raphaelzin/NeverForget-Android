@@ -14,14 +14,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by Raphael Souza on 17-08-10.
  */
 
-public class MainViewOperationsAdapter extends BaseAdapter {
+public class FullOperationsAdapter extends BaseAdapter {
     private final Context context;
     private SelfDAO selfDAO;
     private ContactDAO contactsDAO;
     private OperationDAO operationsDAO;
 
 
-    public MainViewOperationsAdapter(Context context) {
+    public FullOperationsAdapter(Context context) {
         this.context  = context;
         selfDAO       = new SelfDAO();
         contactsDAO   = new ContactDAO();
@@ -65,18 +65,16 @@ public class MainViewOperationsAdapter extends BaseAdapter {
         ImageView arrow = (ImageView) rowView.findViewById(R.id.arrow);
         // Init END
 
-//        if (selfDAO.getSelf().getImage() != null) {
-//            selfPic.setImageBitmap(selfDAO.getSelf().getImage());
-//        }
-//
-//        if (contact.getImage() != null ) {
-//            contactPic.setImageBitmap(contact.getImage());
-//        }
+        if (selfDAO.getSelf().getImage() != null) {
+            selfPic.setImageBitmap(selfDAO.getSelf().getImage());
+        }
 
-//        selfName.setText(selfDAO.getSelf().getFirstName());
+        if (contact.getImage() != null ) {
+            contactPic.setImageBitmap(contact.getImage());
+        }
+
+        selfName.setText(selfDAO.getSelf().getFirstName());
         contactName.setText( contact.getFirstName() );
-        selfName.setText("Raphael");
-//        contactName.setText("William");
 
         amount.setText("$" + operation.amount);
         amount.setText("$" + String.valueOf(operation.amount));

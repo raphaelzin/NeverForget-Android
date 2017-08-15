@@ -47,6 +47,11 @@ public class Contact extends RealmObject {
         }
     }
 
+    public void setName(String name)
+    {
+
+    }
+
     public void setImage(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
