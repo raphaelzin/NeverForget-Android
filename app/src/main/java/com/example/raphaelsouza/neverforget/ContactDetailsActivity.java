@@ -21,12 +21,9 @@ import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static android.R.attr.id;
-import static android.R.attr.name;
-import static com.example.raphaelsouza.neverforget.R.id.fab;
-
 public class ContactDetailsActivity extends AppCompatActivity {
     ContactDAO contactDAO;
+    OperationDAO operationDAO;
     Contact contact;
 
     TextView contactName;
@@ -35,6 +32,10 @@ public class ContactDetailsActivity extends AppCompatActivity {
     ImageButton pickImage;
     ImageButton changeName;
 
+    TextView credit;
+    TextView debt;
+    TextView overall;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +43,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         contactDAO = new ContactDAO();
+        operationDAO = new OperationDAO();
 
         long id = getIntent().getExtras().getLong("ContactID");
         contact = contactDAO.get(id);
@@ -53,6 +55,15 @@ public class ContactDetailsActivity extends AppCompatActivity {
         contactName = (TextView) findViewById(R.id.contactName);
 
         contactName.setText(contact.name);
+
+        overall = (TextView) findViewById(R.id.overall);
+        credit  = (TextView) findViewById(R.id.credit);
+        debt    = (TextView) findViewById(R.id.debt);
+
+        credit.setText("$" + operationDAO.operationsWith(contact.id,false));
+        debt.setText("$" + operationDAO.operationsWith(contact.id,true));
+        overall.setText("$" + (operationDAO.
+                operationsWith(contact.id,false) - operationDAO.operationsWith(contact.id,true)));
 
         if (contact.getImage() != null) {
             contactPicture.setImageBitmap(contact.getImage());
