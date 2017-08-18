@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:padding="6dip"
+    android:layout_marginTop="2dp"
+    android:id="@+id/fullOperationCell">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/selfPicture"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="4dp"
+        android:src="@drawable/ic_account_circle"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/contactPicture"
+        android:layout_marginRight="4dp"
+
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_account_circle"/>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="90dp"
+        android:adjustViewBounds="true"
+        android:id="@+id/arrow"
+        android:src="@drawable/ic_arrow"
+        android:padding="10dp"
+        android:contentDescription="Arrow"
+
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$"
+        android:textColor="@color/colorContent"
+        android:textSize="18sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+</RelativeLayout>

@@ -51,32 +51,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="3"
-        android:layout_margin="8dp"
+        android:layout_margin="12dp"
+        android:id="@+id/totals"
         android:layout_below="@id/contactName">
         <TextView
             android:id="@+id/credit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="29sp"
+            android:gravity="start"
+            android:textSize="23sp"
             android:text="$"/>
         <TextView
             android:id="@+id/overall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="29sp"
+            android:textSize="23sp"
             android:layout_weight="1"
             android:text="$"/>
         <TextView
             android:id="@+id/debt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="29sp"
+            android:gravity="end"
+            android:textSize="23sp"
             android:layout_weight="1"
             android:text="$"/>
     </LinearLayout>
+    <ListView
+        android:id="@+id/compatcList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:divider="@null"
+        android:layout_below="@+id/totals"></ListView>
 
 </RelativeLayout>

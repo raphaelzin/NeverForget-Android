@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -35,6 +36,8 @@ public class ContactDetailsActivity extends AppCompatActivity {
     TextView credit;
     TextView debt;
     TextView overall;
+
+    ListView compactList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,11 @@ public class ContactDetailsActivity extends AppCompatActivity {
         debt.setText("$" + operationDAO.operationsWith(contact.id,true));
         overall.setText("$" + (operationDAO.
                 operationsWith(contact.id,false) - operationDAO.operationsWith(contact.id,true)));
+
+        CompactOperationsAdapter adapter = new CompactOperationsAdapter(this);
+
+        compactList = (ListView) findViewById(R.id.compatcList);
+        compactList.setAdapter(adapter);
 
         if (contact.getImage() != null) {
             contactPicture.setImageBitmap(contact.getImage());
@@ -137,7 +145,6 @@ public class ContactDetailsActivity extends AppCompatActivity {
                         contactDAO.updateName(contact, input.getText().toString());
                     }
                 });
-
         alertDialog.setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {

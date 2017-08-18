@@ -88,7 +88,9 @@ public class AddOperationActivity extends AppCompatActivity {
         CircleImageView selfPic = (CircleImageView) findViewById(R.id.selfPicture);
 
         selfName.setText(selfDAO.getSelf().name);
-        selfPic.setImageBitmap(selfDAO.getSelf().getImage());
+        if (selfDAO.getSelf().getImage() != null) {
+            selfPic.setImageBitmap(selfDAO.getSelf().getImage());
+        }
 
         name.addTextChangedListener(new TextWatcher() {
             @Override

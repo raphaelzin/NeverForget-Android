@@ -49,7 +49,9 @@ public class SettingsActivity extends AppCompatActivity {
         selfPic = (CircleImageView) findViewById(R.id.selfPicture);
 
         name.setText(self.name);
-        selfPic.setImageBitmap(self.getImage());
+        if (self.getImage() != null) {
+            selfPic.setImageBitmap(self.getImage());
+        }
 
         credit.setText("$" + df.format(operationDAO.getTotal(false)));
         debt.setText("$" + df.format(operationDAO.getTotal(true)));
