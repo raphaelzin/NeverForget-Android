@@ -36,7 +36,7 @@ public class Contact extends RealmObject {
 
     public Contact(String name) {
         this.id   = UUID.randomUUID().hashCode();
-        this.name = name.toLowerCase();
+        this.name = name;
     }
 
     public Bitmap getImage() {
@@ -45,6 +45,11 @@ public class Contact extends RealmObject {
         } else {
             return BitmapFactory.decodeByteArray(this.image, 0, this.image.length);
         }
+    }
+
+    public void setName(String name)
+    {
+
     }
 
     public void setImage(Bitmap bitmap) {

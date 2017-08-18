@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
+    android:layout_height="60dp"
     android:padding="6dip"
     android:layout_marginTop="2dp"
     android:id="@+id/fullOperationCell">
@@ -44,30 +44,5 @@
         android:textColor="@color/colorContent"
         android:textSize="18sp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="6dp" />
-
-    <TextView
-        android:id="@+id/selfName"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/selfPicture"
-        android:layout_centerHorizontal="@+id/selfPicture"
-
-        android:text="User"
-        android:textAlignment="center"
-        android:textColor="@color/colorContent" />
-
-    <TextView
-        android:id="@+id/contactName"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-
-        android:text="Other"
-        android:textColor="@color/colorContent"
-        android:textAlignment="center"
-        android:layout_below="@+id/contactPicture"
-        android:layout_centerHorizontal="@+id/contactPicture"
-        android:layout_alignParentEnd="true" />
-
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>

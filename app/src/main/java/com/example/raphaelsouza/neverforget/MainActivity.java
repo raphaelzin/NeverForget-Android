@@ -3,22 +3,20 @@ package com.example.raphaelsouza.neverforget;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
-
-import java.util.List;
 
 import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity {
     ListView operationsList;
-    MainViewOperationsAdapter adapter;
+    FullOperationsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +34,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        adapter = new MainViewOperationsAdapter(this);
+        adapter = new FullOperationsAdapter(this);
         operationsList = (ListView) findViewById(R.id.list_id);
         operationsList.setAdapter(adapter);
         Log.wtf("Count", "Operations: " + adapter.getCount());
+        operationsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+                Operation selected = (Operation) adapter.getItemAtPosition(position);
+                Log.wtf("TAG", "onItemClick: " + selected.toString() );
+                showDetailsActivity(selected);
+            }
+        });
     }
 
     public void addOperation() {
-        Intent addOperation = new Intent(this, AddOperation.class);
+        Intent addOperation = new Intent(this, AddOperationActivity.class);
 //        startActivity(addOperation);
         startActivityForResult(addOperation, 0);
     }
 
+    public void showDetailsActivity(Operation op) {
+//        Intent showDetails = new Intent(this,)
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -65,7 +74,15 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent settings = new Intent(this, SettingsActivity.class);
+            startActivityForResult(settings, 1);
+        }
+
+        if (id == R.id.contacts)
+        {
+            Log.i("Ei!", "Go to contacts");
+            Intent contacts = new Intent(this, ContactsActivity.class);
+            startActivityForResult(contacts, 1);
         }
 
         return super.onOptionsItemSelected(item);

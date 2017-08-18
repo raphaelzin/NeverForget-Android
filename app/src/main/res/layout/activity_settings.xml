@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    android:padding="16dp"
+    tools:context="com.example.raphaelsouza.neverforget.SettingsActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/selfPicture"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_margin="8dp"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_account_circle_hires"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageButton
+        android:id="@+id/pickImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_camera"
+        android:background="@null"
+        android:layout_alignBottom="@+id/selfPicture"
+        android:layout_alignEnd="@+id/selfPicture" />
+
+    <TextView
+        android:id="@+id/selfName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorContent"
+        android:textSize="29sp"
+        android:layout_below="@id/selfPicture"
+        android:gravity="center"
+        android:text="User Name" />
+
+    <ImageButton
+        android:id="@+id/changeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_edit"
+        android:background="@null"
+        android:layout_alignTop="@+id/selfName"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/selfName" />
+
+    <LinearLayout
+        android:layout_below="@id/selfName"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/linearLayout">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContent"
+                android:textSize="26sp"
+                android:layout_weight="1"
+                android:text="Credit"/>
+
+            <TextView
+                android:id="@+id/credit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContent"
+                android:textSize="26sp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="$1924.50"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContent"
+                android:textSize="26sp"
+                android:layout_weight="1"
+                android:text="Debt"/>
+
+            <TextView
+                android:id="@+id/debt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContent"
+                android:textSize="26sp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="$1924.50"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContent"
+                android:textSize="26sp"
+                android:layout_weight="1"
+                android:text="Total"/>
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContent"
+                android:textSize="26sp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="$1924.50"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
