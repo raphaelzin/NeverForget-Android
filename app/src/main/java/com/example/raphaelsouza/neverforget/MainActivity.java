@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showDetailsActivity(Operation op) {
-//        Intent showDetails = new Intent(this,)
+        Intent showDetails = new Intent(this,OperationDetails.class);
+        startActivityForResult(showDetails, 1);
     }
 
     @Override
