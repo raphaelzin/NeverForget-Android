@@ -6,8 +6,42 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.example.raphaelsouza.neverforget.R.id.amountEditText;
+import static com.example.raphaelsouza.neverforget.R.id.fab;
+import static com.example.raphaelsouza.neverforget.R.id.selfName;
+import static com.example.raphaelsouza.neverforget.R.id.when;
 
 public class OperationDetails extends AppCompatActivity {
+
+    OperationDAO operationDAO;
+    ContactDAO contactDAO;
+    SelfDAO selfDAO;
+
+    Operation operation;
+    Contact contact;
+
+    TextView paidAtDetails;
+    TextView descriptionDetails;
+    TextView whenDetails;
+    TextView amountDetails;
+
+    TextView selfNameCell;
+    TextView contactNameCell;
+    TextView amountCell;
+
+    CircleImageView selfPic;
+    CircleImageView contactPic;
+    ImageView arrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,14 +50,62 @@ public class OperationDetails extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        long id = getIntent().getExtras().getLong("OperationID");
+
+        operationDAO = new OperationDAO();
+        contactDAO = new ContactDAO();
+        selfDAO = new SelfDAO();
+
+        operation = operationDAO.get(id);
+        contact = contactDAO.get(operation.contactID);
+
+        descriptionDetails = (TextView) findViewById(R.id.descriptionDetails);
+        paidAtDetails      = (TextView) findViewById(R.id.paidAtDetails);
+        amountDetails      = (TextView) findViewById(R.id.amountDetails);
+        whenDetails        = (TextView) findViewById(R.id.whenDetails);
+
+        contactNameCell    = (TextView) findViewById(R.id.contactName);
+        selfNameCell       = (TextView) findViewById(R.id.selfName);
+        amountCell         = (TextView) findViewById(R.id.amount);
+
+        selfPic    = (CircleImageView) findViewById(R.id.selfPicture);
+        contactPic = (CircleImageView) findViewById(R.id.contactPicture);
+
+        arrow = (ImageView) findViewById(R.id.arrow);
+
+
+        descriptionDetails.setText(operation.details);
+        if (operation.paidDate != null)
+            paidAtDetails.setText(dateString(operation.paidDate));
+        amountDetails.setText("$" + operation.amount);
+        whenDetails.setText(dateString(operation.date));
+
+        contactNameCell.setText(contact.getFirstName());
+        selfNameCell.setText(selfDAO.getSelf().getFirstName());
+        amountCell.setText("$" + operation.amount);
+
+        if (selfDAO.getSelf().getImage() != null)
+            selfPic.setImageBitmap(selfDAO.getSelf().getImage());
+        if (contact.getImage() != null)
+            contactPic.setImageBitmap(contact.getImage());
+
+        if (operation.isDebt)
+            arrow.setRotation(180);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Will Edit", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    public String dateString(Date date) {
+        String myFormat = "MMM, dd - yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        return sdf.format(date.getTime());
     }
 
 }

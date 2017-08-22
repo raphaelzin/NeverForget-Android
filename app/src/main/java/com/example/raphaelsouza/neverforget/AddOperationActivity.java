@@ -99,6 +99,10 @@ public class AddOperationActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 contactName.setText(charSequence.toString().split(" ")[0]);
+                if(contDAO.getByName(charSequence.toString()) != null) {
+                    contactPic.setImageBitmap(contDAO
+                            .getByName(charSequence.toString()).getImage());
+                }
             }
 
             @Override
@@ -111,7 +115,6 @@ public class AddOperationActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
                 amountCell.setText("$"+charSequence.toString());
             }
 

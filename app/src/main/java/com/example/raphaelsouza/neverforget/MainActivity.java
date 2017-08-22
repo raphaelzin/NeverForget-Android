@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
                 Operation selected = (Operation) adapter.getItemAtPosition(position);
                 Log.wtf("TAG", "onItemClick: " + selected.toString() );
+
                 showDetailsActivity(selected);
             }
         });
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void showDetailsActivity(Operation op) {
         Intent showDetails = new Intent(this,OperationDetails.class);
+        showDetails.putExtra("OperationID", op.id);
         startActivityForResult(showDetails, 1);
     }
 

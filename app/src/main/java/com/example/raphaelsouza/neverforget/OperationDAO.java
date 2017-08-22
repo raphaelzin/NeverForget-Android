@@ -16,8 +16,8 @@ public class OperationDAO {
         return realm.where(Operation.class);
     }
 
-    public Contact get(long id) {
-        return realm.where(Contact.class).equalTo("id", id).findFirst();
+    public Operation get(long id) {
+        return realm.where(Operation.class).equalTo("id", id).findFirst();
     }
 
     public void update(Operation operation) {

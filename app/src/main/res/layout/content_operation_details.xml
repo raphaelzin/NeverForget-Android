@@ -34,6 +34,7 @@
                 android:text="When"/>
 
             <TextView
+                android:id="@+id/whenDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorContent"
@@ -58,9 +59,10 @@
                 android:textSize="21sp"
                 android:gravity="start"
                 android:layout_weight="1"
-                android:text="Details"/>
+                android:text="Description"/>
 
             <TextView
+                android:id="@+id/descriptionDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorContent"
@@ -88,6 +90,7 @@
                 android:text="Amount"/>
 
             <TextView
+                android:id="@+id/amountDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorContent"
@@ -115,6 +118,7 @@
                 android:text="Paid at"/>
 
             <TextView
+                android:id="@+id/paidAtDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorContent"
