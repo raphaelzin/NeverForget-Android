@@ -76,18 +76,17 @@ public class AddOperationActivity extends AppCompatActivity {
         contactName = (TextView) findViewById(R.id.contactName);
         amountCell  = (TextView) findViewById(R.id.amount);
 
-
         arrow      = (ImageView) findViewById(R.id.arrow);
         contactPic = (CircleImageView) findViewById(R.id.contactPicture);
 
         isDebtButton   = (Button) findViewById(R.id.isDebt);
         notDebitButton = (Button) findViewById(R.id.notDebt);
-        isDebt = true;
+        isDebt = false;
 
         TextView selfName = (TextView) findViewById(R.id.selfName);
         CircleImageView selfPic = (CircleImageView) findViewById(R.id.selfPicture);
 
-        selfName.setText(selfDAO.getSelf().name);
+        selfName.setText(selfDAO.getSelf().getFirstName());
         if (selfDAO.getSelf().getImage() != null) {
             selfPic.setImageBitmap(selfDAO.getSelf().getImage());
         }

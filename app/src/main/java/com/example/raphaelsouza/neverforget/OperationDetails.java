@@ -1,16 +1,21 @@
 package com.example.raphaelsouza.neverforget;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -43,6 +48,9 @@ public class OperationDetails extends AppCompatActivity {
     CircleImageView contactPic;
     ImageView arrow;
 
+    Calendar whenCalendar;
+    DatePickerDialog.OnDateSetListener date;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +76,7 @@ public class OperationDetails extends AppCompatActivity {
         selfNameCell       = (TextView) findViewById(R.id.selfName);
         amountCell         = (TextView) findViewById(R.id.amount);
 
+
         selfPic    = (CircleImageView) findViewById(R.id.selfPicture);
         contactPic = (CircleImageView) findViewById(R.id.contactPicture);
 
@@ -92,6 +101,14 @@ public class OperationDetails extends AppCompatActivity {
         if (operation.isDebt)
             arrow.setRotation(180);
 
+        ToggleButton toggle = (ToggleButton) findViewById(R.id.togglePaid);
+        toggle.setChecked(operation.paid);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                operationDAO.setPaid(isChecked, operation);
+            }
+        });
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,12 +117,43 @@ public class OperationDetails extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        whenCalendar = Calendar.getInstance();
+        date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                whenCalendar.set(Calendar.YEAR, year);
+                whenCalendar.set(Calendar.MONTH, monthOfYear);
+                whenCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updatePaidDate(whenCalendar.getTime());
+                paidAtDetails.setText(dateString(operation.paidDate));
+            }
+
+        };
+        paidAtDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(OperationDetails.this, date,
+                        whenCalendar.get(Calendar.YEAR),
+                        whenCalendar.get(Calendar.MONTH),
+                        whenCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
     }
 
     public String dateString(Date date) {
         String myFormat = "MMM, dd - yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         return sdf.format(date.getTime());
+    }
+
+    public void updatePaidDate(Date date)
+    {
+
+        operationDAO.setPaidDate(date, operation);
     }
 
 }

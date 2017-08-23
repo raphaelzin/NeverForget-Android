@@ -14,7 +14,7 @@ public class SelfDAO {
     public SelfDAO() {
         if (realm.where(Contact.class).count() == 0)  {
             realm.beginTransaction();
-            realm.copyToRealm(new Self("Your Name"));
+            realm.copyToRealm(new Self("You"));
             realm.commitTransaction();
         }
     }

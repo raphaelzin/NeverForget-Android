@@ -1,5 +1,7 @@
 package com.example.raphaelsouza.neverforget;
 
+import java.util.Date;
+
 import io.realm.Realm;
 import io.realm.RealmQuery;
 
@@ -23,6 +25,20 @@ public class OperationDAO {
     public void update(Operation operation) {
         realm.beginTransaction();
         realm.copyToRealmOrUpdate(operation);
+        realm.commitTransaction();
+    }
+
+    public void setPaidDate(Date date, Operation operation)
+    {
+        realm.beginTransaction();
+        operation.paidDate = date;
+        realm.commitTransaction();
+    }
+
+    public void setPaid(boolean paid, Operation operation)
+    {
+        realm.beginTransaction();
+        operation.paid = paid;
         realm.commitTransaction();
     }
 

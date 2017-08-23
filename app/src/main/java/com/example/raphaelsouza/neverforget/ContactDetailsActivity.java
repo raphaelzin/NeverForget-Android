@@ -121,7 +121,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(ContactDetailsActivity.this);
 
         alertDialog.setTitle("Change Name");
-        alertDialog.setMessage("Enter your new name");
+        alertDialog.setMessage("Enter contact's new name");
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
         alertDialog.setView(input);
