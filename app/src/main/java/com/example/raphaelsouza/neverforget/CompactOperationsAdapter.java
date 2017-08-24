@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.R.attr.id;
+
 /**
  * Created by Raphael on 8/17/2017.
  */
@@ -18,29 +20,31 @@ public class CompactOperationsAdapter extends BaseAdapter {
     private final Context context;
     private SelfDAO selfDAO;
     private ContactDAO contactsDAO;
+    private long contactID;
     private OperationDAO operationsDAO;
 
 
-    public CompactOperationsAdapter(Context context) {
+    public CompactOperationsAdapter(Context context, long contact) {
         this.context  = context;
         selfDAO       = new SelfDAO();
+        contactID     = contact;
         contactsDAO   = new ContactDAO();
         operationsDAO = new OperationDAO();
     }
 
     @Override
     public int getCount() {
-        return operationsDAO.getOperations().findAll().size();
+        return operationsDAO.getOperationsWith(contactID).size();
     }
 
     @Override
     public Object getItem(int position) {
-        return operationsDAO.getOperations().findAll().get(position);
+        return operationsDAO.getOperationsWith(contactID).get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return operationsDAO.getOperations().findAll().get(position).id;
+        return operationsDAO.getOperationsWith(contactID).get(position).id;
     }
 
     @Override

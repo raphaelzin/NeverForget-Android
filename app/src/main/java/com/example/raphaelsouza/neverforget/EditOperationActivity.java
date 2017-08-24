@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,8 +24,10 @@ import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.example.raphaelsouza.neverforget.R.id.fab;
 
-public class AddOperationActivity extends AppCompatActivity {
+public class EditOperationActivity extends AppCompatActivity {
+
     EditText name;
     EditText desc;
     EditText amount;
@@ -48,25 +51,24 @@ public class AddOperationActivity extends AppCompatActivity {
 
     boolean isDebt;
 
+    Operation operation;
+    Contact contact;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_operation);
+        setContentView(R.layout.activity_edit_operation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         opDAO   = new OperationDAO();
         contDAO = new ContactDAO();
         selfDAO = new SelfDAO();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabAdd);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.v("myTag","FAB Clicked");
-                saveOperation();
-            }
-        });
+        long id = getIntent().getExtras().getLong("OperationID");
+        operation = opDAO.get(id);
+        contact   = contDAO.get(operation.contactID);
 
         name   = (EditText) findViewById(R.id.nameEditText);
         when   = (EditText) findViewById(R.id.when);
@@ -83,13 +85,40 @@ public class AddOperationActivity extends AppCompatActivity {
         notDebitButton = (Button) findViewById(R.id.notDebt);
         isDebt = false;
 
+        //Setting pre-defined fields
+        name.setText(contact.name);
+        desc.setText(operation.details);
+        amount.setText("" + operation.amount);
+
+        whenCalendar = Calendar.getInstance();
+        whenCalendar.setTime(operation.date);
+        updateDateLabel();
+
         TextView selfName = (TextView) findViewById(R.id.selfName);
         CircleImageView selfPic = (CircleImageView) findViewById(R.id.selfPicture);
-
         selfName.setText(selfDAO.getSelf().getFirstName());
         if (selfDAO.getSelf().getImage() != null) {
             selfPic.setImageBitmap(selfDAO.getSelf().getImage());
         }
+
+        contactName.setText(contact.getFirstName());
+        if (contact.getImage() != null) {
+            contactPic.setImageBitmap(contact.getImage());
+        }
+
+        amountCell.setText("$" + operation.amount);
+
+        if (operation.isDebt)
+            arrow.setRotation(180);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveOperationEdit();
+            }
+        });
+
 
         name.addTextChangedListener(new TextWatcher() {
             @Override
@@ -98,9 +127,13 @@ public class AddOperationActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 contactName.setText(charSequence.toString().split(" ")[0]);
-                if(contDAO.getByName(charSequence.toString()) != null) {
+                if(contDAO.getByName(charSequence.toString()) != null
+                        && contDAO.getByName(charSequence.toString()).getImage() != null) {
+
                     contactPic.setImageBitmap(contDAO
                             .getByName(charSequence.toString()).getImage());
+                } else {
+                    contactPic.setImageDrawable(getDrawable(R.drawable.ic_account_circle));
                 }
             }
 
@@ -121,10 +154,6 @@ public class AddOperationActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) { }
         });
 
-        whenCalendar = Calendar.getInstance();
-        updateDateLabel();
-
-
         date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -140,13 +169,15 @@ public class AddOperationActivity extends AppCompatActivity {
         when.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(AddOperationActivity.this, date,
+                new DatePickerDialog(EditOperationActivity.this, date,
                         whenCalendar.get(Calendar.YEAR),
                         whenCalendar.get(Calendar.MONTH),
                         whenCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+
     }
+
 
     public void updateDateLabel() {
         String myFormat = "MMM, dd - yyyy"; //In which you need put here
@@ -169,8 +200,18 @@ public class AddOperationActivity extends AppCompatActivity {
         }
     }
 
-    public void saveOperation() {
-        if (name.getText().toString().isEmpty() || amount.getText().toString().isEmpty()) {
+    public void saveOperationEdit() {
+        if (!name.getText().toString().isEmpty() && !amount.getText().toString().isEmpty()) {
+            contact = contDAO.getByName(name.getText().toString());
+//          Contato inexistente, criar um novo
+            if ( contDAO.getByName(name.getText().toString()) == null ) {
+                contact = new Contact(name.getText().toString());
+                contDAO.create(contact);
+            }
+            opDAO.update(operation, desc.getText().toString(), Double.parseDouble(amount.getText()
+                    .toString()), whenCalendar.getTime(), isDebt, contact.id);
+
+        } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("The fields amount and name have to be filled")
                     .setTitle("Ops, there's a problem");
@@ -181,20 +222,7 @@ public class AddOperationActivity extends AppCompatActivity {
             dialog.show();
             return;
         }
-
-        Contact contact = contDAO.getByName(name.getText().toString());
-        Log.wtf("Count", "saveOperation: " + contDAO.getContacts().count() );
-
-        //Contato inexistente, criar um novo
-        if ( contDAO.getByName(name.getText().toString()) == null ) {
-            contact = new Contact(name.getText().toString());
-            contDAO.create(contact);
-        }
-
-        Operation operation = new Operation( contact.id, desc.getText().toString(),
-                whenCalendar.getTime(), isDebt,  Double.parseDouble(amount.getText().toString()) );
-
-        opDAO.create(operation);
         finish();
     }
+
 }

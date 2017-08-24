@@ -49,10 +49,9 @@
 
     <TextView
         android:id="@+id/selfName"
-        android:layout_width="70dp"
+        android:layout_width="68dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/selfPicture"
-        android:layout_centerHorizontal="@+id/selfPicture"
 
         android:text="User"
         android:textAlignment="center"
@@ -60,7 +59,7 @@
 
     <TextView
         android:id="@+id/contactName"
-        android:layout_width="70dp"
+        android:layout_width="68dp"
         android:layout_height="wrap_content"
 
         android:text="Other"

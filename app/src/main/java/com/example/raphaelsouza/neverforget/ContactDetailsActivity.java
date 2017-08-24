@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -68,7 +66,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
         overall.setText("$" + (operationDAO.
                 operationsWith(contact.id,false) - operationDAO.operationsWith(contact.id,true)));
 
-        CompactOperationsAdapter adapter = new CompactOperationsAdapter(this);
+        CompactOperationsAdapter adapter = new CompactOperationsAdapter(this, contact.id);
 
         compactList = (ListView) findViewById(R.id.compatcList);
         compactList.setAdapter(adapter);
@@ -88,16 +86,6 @@ public class ContactDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 editName();
-            }
-        });
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
     }
@@ -133,7 +121,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(ContactDetailsActivity.this);
 
         alertDialog.setTitle("Change Name");
-        alertDialog.setMessage("Enter your new name");
+        alertDialog.setMessage("Enter contact's new name");
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
         alertDialog.setView(input);

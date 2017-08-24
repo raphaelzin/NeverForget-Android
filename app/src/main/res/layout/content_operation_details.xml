@@ -1,11 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.raphaelsouza.neverforget.OperationDetails"
+    tools:context="com.example.raphaelsouza.neverforget.OperationDetailsActivity"
     tools:showIn="@layout/activity_operation_details">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:orientation="vertical">
+        <include layout="@layout/full_operation_cell" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="12dp"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContent"
+                android:textSize="21sp"
+                android:gravity="start"
+                android:layout_weight="1"
+                android:text="When"/>
+
+            <TextView
+                android:id="@+id/whenDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContent"
+                android:textSize="21sp"
+                android:gravity="end"
+                android:layout_weight="1"
+                android:text="Aug, 21 - 2017"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContent"
+                android:textSize="21sp"
+                android:gravity="start"
+                android:layout_weight="1"
+                android:text="Description"/>
+
+            <TextView
+                android:id="@+id/descriptionDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContent"
+                android:textSize="21sp"
+                android:gravity="end"
+                android:layout_weight="1"
+                android:text="Operations details"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContent"
+                android:textSize="21sp"
+                android:gravity="start"
+                android:layout_weight="1"
+                android:text="Amount"/>
+
+            <TextView
+                android:id="@+id/amountDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContent"
+                android:textSize="21sp"
+                android:gravity="end"
+                android:layout_weight="1"
+                android:text="$12.63"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContent"
+                android:textSize="21sp"
+                android:gravity="start"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:text="Is it paid?"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end">
+
+                <ToggleButton
+                    android:id="@+id/togglePaid"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+
+                    android:textOff="No"
+                    android:textOn="Yes" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContent"
+                android:textSize="21sp"
+                android:gravity="start"
+                android:layout_weight="1"
+                android:text="Paid at"/>
+
+            <TextView
+                android:id="@+id/paidAtDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContent"
+                android:textSize="21sp"
+                android:gravity="end"
+                android:layout_weight="1"
+                android:text="Aug, 21 - 2017"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

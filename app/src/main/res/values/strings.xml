@@ -4,4 +4,5 @@
     <string name="title_activity_add_operation">AddOperation</string>
     <string name="title_activity_operation_details">OperationDetails</string>
     <string name="title_activity_contact_details">ContactDetailsActivity</string>
+    <string name="title_activity_edit_operation">EditOperationActivity</string>
 </resources>
