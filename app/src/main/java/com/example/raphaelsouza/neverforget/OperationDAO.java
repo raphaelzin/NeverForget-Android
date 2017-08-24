@@ -4,8 +4,7 @@ import java.util.Date;
 
 import io.realm.Realm;
 import io.realm.RealmQuery;
-
-import static android.R.attr.id;
+import io.realm.RealmResults;
 
 /**
  * Created by raphaelsouza on 17-08-09.
@@ -22,9 +21,16 @@ public class OperationDAO {
         return realm.where(Operation.class).equalTo("id", id).findFirst();
     }
 
-    public void update(Operation operation) {
+    public void update(Operation operation, String details,
+                       double amount, Date when, boolean isDebt, long contID) {
         realm.beginTransaction();
-        realm.copyToRealmOrUpdate(operation);
+
+        operation.contactID = contID;
+        operation.details   = details;
+        operation.isDebt    = isDebt;
+        operation.amount    = amount;
+        operation.date      = when;
+
         realm.commitTransaction();
     }
 
@@ -46,6 +52,10 @@ public class OperationDAO {
         realm.beginTransaction();
         realm.copyToRealm(operation);
         realm.commitTransaction();
+    }
+
+    public RealmResults<Operation> getOperationsWith(long id) {
+        return realm.where(Operation.class).equalTo("contactID", id).findAll();
     }
 
     public double operationsWith(long id, boolean debt) {

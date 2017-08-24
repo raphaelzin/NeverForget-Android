@@ -1,6 +1,7 @@
 package com.example.raphaelsouza.neverforget;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -21,12 +21,7 @@ import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.example.raphaelsouza.neverforget.R.id.amountEditText;
-import static com.example.raphaelsouza.neverforget.R.id.fab;
-import static com.example.raphaelsouza.neverforget.R.id.selfName;
-import static com.example.raphaelsouza.neverforget.R.id.when;
-
-public class OperationDetails extends AppCompatActivity {
+public class OperationDetailsActivity extends AppCompatActivity {
 
     OperationDAO operationDAO;
     ContactDAO contactDAO;
@@ -113,8 +108,7 @@ public class OperationDetails extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Will Edit", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                showEditActivity();
             }
         });
 
@@ -135,13 +129,20 @@ public class OperationDetails extends AppCompatActivity {
         paidAtDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(OperationDetails.this, date,
+                new DatePickerDialog(OperationDetailsActivity.this, date,
                         whenCalendar.get(Calendar.YEAR),
                         whenCalendar.get(Calendar.MONTH),
                         whenCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
+    }
+
+
+    public void showEditActivity() {
+        Intent showDetails = new Intent(this,EditOperationActivity.class);
+        showDetails.putExtra("OperationID", operation.id);
+        startActivityForResult(showDetails, 1);
     }
 
     public String dateString(Date date) {

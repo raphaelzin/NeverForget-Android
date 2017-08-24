@@ -66,7 +66,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
         overall.setText("$" + (operationDAO.
                 operationsWith(contact.id,false) - operationDAO.operationsWith(contact.id,true)));
 
-        CompactOperationsAdapter adapter = new CompactOperationsAdapter(this);
+        CompactOperationsAdapter adapter = new CompactOperationsAdapter(this, contact.id);
 
         compactList = (ListView) findViewById(R.id.compatcList);
         compactList.setAdapter(adapter);
