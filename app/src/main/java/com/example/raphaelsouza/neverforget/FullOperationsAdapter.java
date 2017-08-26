@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.realm.Sort;
 
 /**
  * Created by Raphael Souza on 17-08-10.
@@ -35,12 +36,12 @@ public class FullOperationsAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return operationsDAO.getOperations().findAll().get(position);
+        return operationsDAO.getOperations().findAllSorted("paid", Sort.ASCENDING).get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return operationsDAO.getOperations().findAll().get(position).id;
+        return operationsDAO.getOperations().findAllSorted("paid", Sort.ASCENDING).get(position).id;
     }
 
     @Override
@@ -50,7 +51,6 @@ public class FullOperationsAdapter extends BaseAdapter {
 
         Operation operation = (Operation) getItem(position);
         Contact contact     = contactsDAO.get(operation.contactID);
-
 
         // Init views
         View rowView = inflater.inflate(R.layout.full_operation_cell, parent, false);
@@ -65,13 +65,11 @@ public class FullOperationsAdapter extends BaseAdapter {
         ImageView arrow = (ImageView) rowView.findViewById(R.id.arrow);
         // Init END
 
-        if (selfDAO.getSelf().getImage() != null) {
+        if (selfDAO.getSelf().getImage() != null)
             selfPic.setImageBitmap(selfDAO.getSelf().getImage());
-        }
 
-        if (contact.getImage() != null ) {
+        if (contact.getImage() != null )
             contactPic.setImageBitmap(contact.getImage());
-        }
 
         selfName.setText(selfDAO.getSelf().getFirstName());
         contactName.setText( contact.getFirstName() );
@@ -79,9 +77,8 @@ public class FullOperationsAdapter extends BaseAdapter {
         amount.setText(Utils.currency(operation.amount));
         amount.setText(Utils.currency(operation.amount));
 
-        if (operation.isDebt) {
-            arrow.setRotation(180);
-        }
+        if (operation.isDebt) arrow.setRotation(180);
+        rowView.setAlpha( (operation.paid) ? 0.5f : 1f);
 
         return rowView;
     }

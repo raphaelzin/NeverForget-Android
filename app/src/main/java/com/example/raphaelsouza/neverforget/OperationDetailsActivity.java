@@ -56,6 +56,7 @@ public class OperationDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_operation_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("Details");
 
         long id = getIntent().getExtras().getLong("OperationID");
 

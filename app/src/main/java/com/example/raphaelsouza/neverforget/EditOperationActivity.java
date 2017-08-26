@@ -60,7 +60,7 @@ public class EditOperationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_operation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        setTitle("Edit");
 
         opDAO   = new OperationDAO();
         contDAO = new ContactDAO();

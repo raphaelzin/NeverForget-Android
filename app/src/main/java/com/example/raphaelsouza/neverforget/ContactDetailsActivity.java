@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -49,6 +50,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
         long id = getIntent().getExtras().getLong("ContactID");
         contact = contactDAO.get(id);
+        setTitle(contact.name);
 
         pickImage  = (ImageButton) findViewById(R.id.pickImage);
         changeName = (ImageButton) findViewById(R.id.changeName);
@@ -85,7 +87,21 @@ public class ContactDetailsActivity extends AppCompatActivity {
             }
         });
 
+        compactList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+                Operation selected = (Operation) adapter.getItemAtPosition(position);
+                showDetailsActivity(selected);
+            }
+        });
+
         setup();
+    }
+
+    public void showDetailsActivity(Operation op) {
+        Intent showDetails = new Intent(this,OperationDetailsActivity.class);
+        showDetails.putExtra("OperationID", op.id);
+        startActivityForResult(showDetails, 1);
     }
 
     public void setup() {

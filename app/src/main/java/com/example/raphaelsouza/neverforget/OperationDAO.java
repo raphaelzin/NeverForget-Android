@@ -59,12 +59,13 @@ public class OperationDAO {
     }
 
     public double operationsWith(long id, boolean debt) {
-        return getOperations().equalTo("contactID", id).equalTo("isDebt", debt)
-                .sum("amount").doubleValue();
+        return getOperations().equalTo("contactID", id).
+                equalTo("isDebt", debt).equalTo("paid", false).sum("amount").doubleValue();
     }
 
     public double getTotal(boolean debt) {
-        return getOperations().equalTo("isDebt", debt).sum("amount").doubleValue();
+        return getOperations().equalTo("isDebt", debt)
+                .equalTo("paid", false).sum("amount").doubleValue();
     }
 
     public void delete(final Operation operation) {

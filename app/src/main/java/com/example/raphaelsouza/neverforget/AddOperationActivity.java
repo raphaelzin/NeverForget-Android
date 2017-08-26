@@ -54,6 +54,7 @@ public class AddOperationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_operation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("Add");
 
         opDAO   = new OperationDAO();
         contDAO = new ContactDAO();
