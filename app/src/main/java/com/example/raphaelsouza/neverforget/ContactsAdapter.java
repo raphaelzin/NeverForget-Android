@@ -59,8 +59,8 @@ public class ContactsAdapter extends BaseAdapter {
             contactPic.setImageResource(R.drawable.ic_account_circle);
         }
 
-        totalDebt.setText("$" + operationDAO.operationsWith(contact.id,true));
-        totalCredit.setText("$" + operationDAO.operationsWith(contact.id,false));
+        totalDebt.setText(Utils.currency(operationDAO.operationsWith(contact.id,true)));
+        totalCredit.setText(Utils.currency(operationDAO.operationsWith(contact.id,false)));
 
         return rowView;
     }

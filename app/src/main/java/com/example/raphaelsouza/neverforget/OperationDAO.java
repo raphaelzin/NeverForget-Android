@@ -34,16 +34,16 @@ public class OperationDAO {
         realm.commitTransaction();
     }
 
-    public void setPaidDate(Date date, Operation operation)
-    {
+    public void setPaidDate(Date date, Operation operation) {
         realm.beginTransaction();
         operation.paidDate = date;
         realm.commitTransaction();
     }
 
-    public void setPaid(boolean paid, Operation operation)
-    {
+    public void setPaid(boolean paid, Operation operation) {
+
         realm.beginTransaction();
+        operation.paidDate = null;
         operation.paid = paid;
         realm.commitTransaction();
     }

@@ -4,16 +4,17 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -46,6 +47,9 @@ public class OperationDetailsActivity extends AppCompatActivity {
     Calendar whenCalendar;
     DatePickerDialog.OnDateSetListener date;
 
+    ToggleButton toggle;
+    LinearLayout paidAtRow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +60,8 @@ public class OperationDetailsActivity extends AppCompatActivity {
         long id = getIntent().getExtras().getLong("OperationID");
 
         operationDAO = new OperationDAO();
-        contactDAO = new ContactDAO();
-        selfDAO = new SelfDAO();
+        contactDAO   = new ContactDAO();
+        selfDAO      = new SelfDAO();
 
         operation = operationDAO.get(id);
         contact = contactDAO.get(operation.contactID);
@@ -76,31 +80,21 @@ public class OperationDetailsActivity extends AppCompatActivity {
         contactPic = (CircleImageView) findViewById(R.id.contactPicture);
 
         arrow = (ImageView) findViewById(R.id.arrow);
+        toggle = (ToggleButton) findViewById(R.id.togglePaid);
+        paidAtRow = (LinearLayout) findViewById(R.id.paidAtRow);
+
+        setupView();
 
 
-        descriptionDetails.setText(operation.details);
-        if (operation.paidDate != null)
-            paidAtDetails.setText(dateString(operation.paidDate));
-        amountDetails.setText("$" + operation.amount);
-        whenDetails.setText(dateString(operation.date));
-
-        contactNameCell.setText(contact.getFirstName());
-        selfNameCell.setText(selfDAO.getSelf().getFirstName());
-        amountCell.setText("$" + operation.amount);
-
-        if (selfDAO.getSelf().getImage() != null)
-            selfPic.setImageBitmap(selfDAO.getSelf().getImage());
-        if (contact.getImage() != null)
-            contactPic.setImageBitmap(contact.getImage());
-
-        if (operation.isDebt)
-            arrow.setRotation(180);
-
-        ToggleButton toggle = (ToggleButton) findViewById(R.id.togglePaid);
-        toggle.setChecked(operation.paid);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 operationDAO.setPaid(isChecked, operation);
+                paidAtRow.setVisibility((operation.paid) ? View.VISIBLE : View.INVISIBLE);
+
+                SpannableString content = new SpannableString((operation.paidDate != null) ?
+                        dateString(operation.paidDate): "Set Paid Date");
+                content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+                paidAtDetails.setText(content);
             }
         });
 
@@ -122,7 +116,9 @@ public class OperationDetailsActivity extends AppCompatActivity {
                 whenCalendar.set(Calendar.MONTH, monthOfYear);
                 whenCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updatePaidDate(whenCalendar.getTime());
-                paidAtDetails.setText(dateString(operation.paidDate));
+                SpannableString content = new SpannableString(dateString(operation.paidDate));
+                content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+                paidAtDetails.setText(content);
             }
 
         };
@@ -135,7 +131,38 @@ public class OperationDetailsActivity extends AppCompatActivity {
                         whenCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+    }
 
+    public void setupView() {
+        descriptionDetails.setText(operation.details);
+        if (operation.paid) {
+            String paidAtLabel;
+            if (operation.paidDate != null)
+                paidAtLabel = dateString(operation.paidDate);
+            else
+                paidAtLabel = "Set Paid Date";
+            SpannableString paid = new SpannableString(paidAtLabel);
+            paid.setSpan(new UnderlineSpan(), 0, paid.length(), 0);
+            paidAtDetails.setText(paid);
+        }
+
+        amountDetails.setText(Utils.currency(operation.amount));
+        whenDetails.setText(dateString(operation.date));
+
+        contactNameCell.setText(contact.getFirstName());
+        selfNameCell.setText(selfDAO.getSelf().getFirstName());
+        amountCell.setText(Utils.currency(operation.amount));
+
+        if (selfDAO.getSelf().getImage() != null)
+            selfPic.setImageBitmap(selfDAO.getSelf().getImage());
+        if (contact.getImage() != null)
+            contactPic.setImageBitmap(contact.getImage());
+
+        if (operation.isDebt)
+            arrow.setRotation(180);
+
+        toggle.setChecked(operation.paid);
+        paidAtRow.setVisibility((operation.paid) ? View.VISIBLE : View.INVISIBLE);
     }
 
 
@@ -153,8 +180,11 @@ public class OperationDetailsActivity extends AppCompatActivity {
 
     public void updatePaidDate(Date date)
     {
-
         operationDAO.setPaidDate(date, operation);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        setupView();
+    }
 }

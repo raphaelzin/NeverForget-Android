@@ -118,8 +118,7 @@ public class EditOperationActivity extends AppCompatActivity {
                 saveOperationEdit();
             }
         });
-
-
+        
         name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -178,7 +177,6 @@ public class EditOperationActivity extends AppCompatActivity {
 
     }
 
-
     public void updateDateLabel() {
         String myFormat = "MMM, dd - yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -190,13 +188,9 @@ public class EditOperationActivity extends AppCompatActivity {
         if (view.getId() == R.id.isDebt) {
             isDebt = true;
             arrow.setRotation(180);
-//            notDebit.setBackgroundColor(Color.argb(1,120,120,120));
-//            isDebt.setBackgroundColor(getResources().getColor(R.color.colorAccent));
         } else {
             isDebt = false;
             arrow.setRotation(0);
-//            isDebt.setBackgroundColor(Color.argb(1,120,120,120));
-//            notDebit.setBackgroundColor(getResources().getColor(R.color.colorAccent));
         }
     }
 
@@ -224,5 +218,4 @@ public class EditOperationActivity extends AppCompatActivity {
         }
         finish();
     }
-
 }

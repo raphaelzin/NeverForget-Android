@@ -31,9 +31,15 @@ public class ContactsActivity extends AppCompatActivity {
         });
     }
 
+
     public void showDetailsActivity(Contact selected) {
         Intent detailsActivity = new Intent(this, ContactDetailsActivity.class);
         detailsActivity.putExtra("ContactID", selected.id);
         startActivityForResult(detailsActivity, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        adapter.notifyDataSetChanged();
     }
 }

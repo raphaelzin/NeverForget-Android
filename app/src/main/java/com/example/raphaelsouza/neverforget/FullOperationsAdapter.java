@@ -76,8 +76,8 @@ public class FullOperationsAdapter extends BaseAdapter {
         selfName.setText(selfDAO.getSelf().getFirstName());
         contactName.setText( contact.getFirstName() );
 
-        amount.setText("$" + operation.amount);
-        amount.setText("$" + String.valueOf(operation.amount));
+        amount.setText(Utils.currency(operation.amount));
+        amount.setText(Utils.currency(operation.amount));
 
         if (operation.isDebt) {
             arrow.setRotation(180);

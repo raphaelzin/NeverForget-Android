@@ -36,6 +36,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
     TextView overall;
 
     ListView compactList;
+    CompactOperationsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +62,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
         credit  = (TextView) findViewById(R.id.credit);
         debt    = (TextView) findViewById(R.id.debt);
 
-        credit.setText("$" + operationDAO.operationsWith(contact.id,false));
-        debt.setText("$" + operationDAO.operationsWith(contact.id,true));
-        overall.setText("$" + (operationDAO.
-                operationsWith(contact.id,false) - operationDAO.operationsWith(contact.id,true)));
-
-        CompactOperationsAdapter adapter = new CompactOperationsAdapter(this, contact.id);
+        adapter = new CompactOperationsAdapter(this, contact.id);
 
         compactList = (ListView) findViewById(R.id.compatcList);
         compactList.setAdapter(adapter);
@@ -88,6 +84,16 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 editName();
             }
         });
+
+        setup();
+    }
+
+    public void setup() {
+        credit.setText(Utils.currency(operationDAO.operationsWith(contact.id,false)));
+        debt.setText(Utils.currency(operationDAO.operationsWith(contact.id,true)));
+        overall.setText(Utils.currency(operationDAO.
+                operationsWith(contact.id,false) - operationDAO.operationsWith(contact.id,true)));
+        adapter.notifyDataSetChanged();
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
@@ -123,6 +129,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
         alertDialog.setTitle("Change Name");
         alertDialog.setMessage("Enter contact's new name");
         final EditText input = new EditText(this);
+        input.setText(contact.name);
         input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
         alertDialog.setView(input);
 

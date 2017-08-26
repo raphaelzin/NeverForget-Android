@@ -34,7 +34,6 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        DecimalFormat df = new DecimalFormat("#.##");
 
         selfDAO = new SelfDAO();
         operationDAO = new OperationDAO();
@@ -53,9 +52,9 @@ public class SettingsActivity extends AppCompatActivity {
             selfPic.setImageBitmap(self.getImage());
         }
 
-        credit.setText("$" + df.format(operationDAO.getTotal(false)));
-        debt.setText("$" + df.format(operationDAO.getTotal(true)));
-        total.setText("$" + df.format((operationDAO.getTotal(false)-operationDAO.getTotal(true))));
+        credit.setText(Utils.currency(operationDAO.getTotal(false)));
+        debt.setText(Utils.currency(operationDAO.getTotal(true)));
+        total.setText(Utils.currency((operationDAO.getTotal(false)-operationDAO.getTotal(true))));
 
         ImageButton pickImage = (ImageButton) findViewById(R.id.pickImage);
         ImageButton editName  = (ImageButton) findViewById(R.id.changeName);

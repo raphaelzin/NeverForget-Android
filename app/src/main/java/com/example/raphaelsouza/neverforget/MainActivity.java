@@ -42,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
                 Operation selected = (Operation) adapter.getItemAtPosition(position);
-                Log.wtf("TAG", "onItemClick: " + selected.toString() );
-
                 showDetailsActivity(selected);
             }
         });
@@ -51,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void addOperation() {
         Intent addOperation = new Intent(this, AddOperationActivity.class);
-//        startActivity(addOperation);
         startActivityForResult(addOperation, 0);
     }
 
@@ -81,8 +78,7 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(settings, 1);
         }
 
-        if (id == R.id.contacts)
-        {
+        if (id == R.id.contacts) {
             Log.i("Ei!", "Go to contacts");
             Intent contacts = new Intent(this, ContactsActivity.class);
             startActivityForResult(contacts, 1);
