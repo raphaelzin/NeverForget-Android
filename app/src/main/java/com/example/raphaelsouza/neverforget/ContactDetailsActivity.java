@@ -3,6 +3,7 @@ package com.example.raphaelsouza.neverforget;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
@@ -16,7 +17,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.soundcloud.android.crop.Crop;
+
+import java.io.File;
 import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -112,30 +117,9 @@ public class ContactDetailsActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
-        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-        if (imageReturnedIntent == null) {
-            return;
-        }
-        try {
-            Bitmap bm = MediaStore.Images
-                    .Media.getBitmap(this.getContentResolver(), imageReturnedIntent.getData());
-            bm = getResizedBitmap(bm,500);
-            contactDAO.updatePicture(contact, bm);
-            contactPicture.setImageBitmap(bm);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
     public void pickProfilePic() {
         Log.wtf("Tag", "pickProfilePic: will pick pic" );
-        Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        pickPhoto.setType("image/*");
-        startActivityForResult(pickPhoto , 1);
-
+        Crop.pickImage(this);
     }
 
     public void editName() {
@@ -166,20 +150,34 @@ public class ContactDetailsActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
-        int width = image.getWidth();
-        int height = image.getHeight();
 
-        float bitmapRatio = (float) width / (float) height;
-        if (bitmapRatio > 1) {
-            width = maxSize;
-            height = (int) (width / bitmapRatio);
-        } else {
-            height = maxSize;
-            width = (int) (height * bitmapRatio);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent result) {
+        if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK) {
+            beginCrop(result.getData());
+        } else if (requestCode == Crop.REQUEST_CROP) {
+            handleCrop(resultCode, result);
         }
-
-        return Bitmap.createScaledBitmap(image, width, height, true);
     }
 
+    private void beginCrop(Uri source) {
+        Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
+        Crop.of(source, destination).asSquare().start(this);
+    }
+
+    private void handleCrop(int resultCode, Intent result) {
+        if (resultCode == RESULT_OK) {
+            contactPicture.setImageURI(Crop.getOutput(result));
+            try {
+                Bitmap bm = MediaStore.Images
+                        .Media.getBitmap(this.getContentResolver(), Crop.getOutput(result));
+                contactDAO.updatePicture(contact, bm);
+            } catch  (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else if (resultCode == Crop.RESULT_ERROR) {
+            Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
 }

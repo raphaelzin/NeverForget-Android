@@ -3,6 +3,7 @@ package com.example.raphaelsouza.neverforget;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.soundcloud.android.crop.Crop;
+
+import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
@@ -60,6 +66,7 @@ public class SettingsActivity extends AppCompatActivity {
         ImageButton pickImage = (ImageButton) findViewById(R.id.pickImage);
         ImageButton editName  = (ImageButton) findViewById(R.id.changeName);
 
+
         pickImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,30 +82,39 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
-        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-        if (imageReturnedIntent == null) {
-            return;
-        }
-        try {
-            Bitmap bm = MediaStore.Images
-                    .Media.getBitmap(this.getContentResolver(), imageReturnedIntent.getData());
-            bm = getResizedBitmap(bm,500);
-            selfDAO.updateSelfPicture(bm);
-            selfPic.setImageBitmap(bm);
-        } catch (IOException e) {
-            e.printStackTrace();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent result) {
+        if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK) {
+            beginCrop(result.getData());
+        } else if (requestCode == Crop.REQUEST_CROP) {
+            handleCrop(resultCode, result);
         }
     }
 
+    private void beginCrop(Uri source) {
+        Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
+        Crop.of(source, destination).asSquare().start(this);
+    }
+
+    private void handleCrop(int resultCode, Intent result) {
+        if (resultCode == RESULT_OK) {
+            selfPic.setImageURI(Crop.getOutput(result));
+            try {
+                Bitmap bm = MediaStore.Images
+                        .Media.getBitmap(this.getContentResolver(), Crop.getOutput(result));
+                selfDAO.updateSelfPicture(bm);
+            } catch  (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else if (resultCode == Crop.RESULT_ERROR) {
+            Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
 
     public void pickProfilePic() {
         Log.wtf("Tag", "pickProfilePic: will pick pic" );
-        Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        pickPhoto.setType("image/*");
-        startActivityForResult(pickPhoto , 1);//one can be replaced with any action code
-
+        Crop.pickImage(this);
     }
 
     public void editName() {
@@ -127,21 +143,5 @@ public class SettingsActivity extends AppCompatActivity {
                 });
 
         alertDialog.show();
-    }
-
-    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
-        int width = image.getWidth();
-        int height = image.getHeight();
-
-        float bitmapRatio = (float) width / (float) height;
-        if (bitmapRatio > 1) {
-            width = maxSize;
-            height = (int) (width / bitmapRatio);
-        } else {
-            height = maxSize;
-            width = (int) (height * bitmapRatio);
-        }
-
-        return Bitmap.createScaledBitmap(image, width, height, true);
     }
 }
