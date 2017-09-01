@@ -167,15 +167,15 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
     private void handleCrop(int resultCode, Intent result) {
         if (resultCode == RESULT_OK) {
-            contactPicture.setImageURI(Crop.getOutput(result));
             try {
                 Bitmap bm = MediaStore.Images
                         .Media.getBitmap(this.getContentResolver(), Crop.getOutput(result));
+                bm = Utils.getResizedBitmap(bm);
                 contactDAO.updatePicture(contact, bm);
+                contactPicture.setImageBitmap(Utils.getResizedBitmap(bm));
             } catch  (IOException e) {
                 e.printStackTrace();
             }
-
         } else if (resultCode == Crop.RESULT_ERROR) {
             Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_LONG).show();
         }

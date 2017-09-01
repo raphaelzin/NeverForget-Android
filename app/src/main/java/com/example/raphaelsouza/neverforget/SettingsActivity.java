@@ -98,11 +98,14 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void handleCrop(int resultCode, Intent result) {
         if (resultCode == RESULT_OK) {
-            selfPic.setImageURI(Crop.getOutput(result));
+
+
             try {
                 Bitmap bm = MediaStore.Images
                         .Media.getBitmap(this.getContentResolver(), Crop.getOutput(result));
+                bm = Utils.getResizedBitmap(bm);
                 selfDAO.updateSelfPicture(bm);
+                selfPic.setImageBitmap(bm);
             } catch  (IOException e) {
                 e.printStackTrace();
             }
