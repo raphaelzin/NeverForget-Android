@@ -1,6 +1,11 @@
 package com.example.raphaelsouza.neverforget;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +82,15 @@ public class FullOperationsAdapter extends BaseAdapter {
         amount.setText(Utils.currency(operation.amount));
         amount.setText(Utils.currency(operation.amount));
 
-        if (operation.isDebt) arrow.setRotation(180);
+//        GradientDrawable bgShape = (GradientDrawable)arrow.getBackground();
+        if (operation.isDebt) {
+            arrow.setRotation(180);
+            arrow.setImageDrawable(context.getDrawable(R.drawable.ic_arrow_red));
+        } else {
+            arrow.setImageDrawable(context.getDrawable(R.drawable.ic_arrow));
+        }
+
+
         rowView.setAlpha( (operation.paid) ? 0.5f : 1f);
 
         return rowView;

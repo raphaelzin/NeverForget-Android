@@ -24,7 +24,6 @@ import java.text.DecimalFormat;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
 public class SettingsActivity extends AppCompatActivity {
 
     CircleImageView selfPic;

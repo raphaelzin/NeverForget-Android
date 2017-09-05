@@ -2,11 +2,11 @@
 
 <resources>
     <!---->
-    <color name="colorPrimary">#1565c0</color>
-    <color name="colorPrimaryDark">#000</color>
+    <color name="colorPrimary">#2196f3</color>
+    <color name="colorPrimaryDark">#0069c0</color>
 
     <color name="colorAccent">#FE4847</color>
-    <color name="colorContent">#fff</color>
+    <color name="colorContent">#2196f3</color>
 
     <color name="colorButton">#fff</color>
 
@@ -16,8 +16,6 @@
     <color name="colorDark">#242831</color>
     <color name="colorGray">#3A404B</color>
     <color name="colorRed">#FE4847</color>
-
+    <color name="transparent">#00000000</color>
     <!-- Dark Theme -->
-
-
 </resources>

@@ -15,5 +15,5 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/list_id"
-        android:divider="@null" />
+        />
 </RelativeLayout>
