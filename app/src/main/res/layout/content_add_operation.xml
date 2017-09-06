@@ -16,6 +16,14 @@
     <include layout="@layout/full_operation_cell" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:paddingTop="16dp"
+        android:background="@drawable/layout_shadow"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <android.support.design.widget.TextInputLayout
         android:id="@+id/name_layout"
         android:layout_width="match_parent"
@@ -124,5 +132,5 @@
             android:text="I Lent" />
 
     </LinearLayout>
-
+    </LinearLayout>
 </LinearLayout>
