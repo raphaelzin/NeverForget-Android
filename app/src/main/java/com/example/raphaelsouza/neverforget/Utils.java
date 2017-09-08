@@ -14,8 +14,13 @@ public class Utils {
         String amountString;
         NumberFormat in = NumberFormat.getCurrencyInstance();
         amountString = in.format(amount);
-
         return amountString;
+    }
+
+    static String currency(String amount) {
+        NumberFormat in = NumberFormat.getCurrencyInstance();
+        amount = in.format(amount);
+        return amount;
     }
 
     static Bitmap getResizedBitmap(Bitmap image) {

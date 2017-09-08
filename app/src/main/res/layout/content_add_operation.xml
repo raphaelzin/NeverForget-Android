@@ -120,7 +120,7 @@
             android:layout_weight="2"
             android:layout_marginRight="-5dp"
             android:onClick="setDebt"
-            android:text="I borrowed" />
+            android:text="Borrowing" />
 
         <Button
             android:id="@+id/notDebt"
@@ -129,7 +129,7 @@
             android:layout_weight="2"
             android:layout_marginLeft="-5dp"
             android:onClick="setDebt"
-            android:text="I Lent" />
+            android:text="Lending" />
 
     </LinearLayout>
     </LinearLayout>

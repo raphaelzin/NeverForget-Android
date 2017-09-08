@@ -77,8 +77,13 @@ public class CompactOperationsAdapter extends BaseAdapter {
         amount.setText(Utils.currency(operation.amount));
         amount.setText(Utils.currency(operation.amount));
 
-        if (operation.isDebt) arrow.setRotation(180);
-            rowView.setAlpha( (operation.paid) ? 0.5f : 1f);
+        if (operation.isDebt) {
+            arrow.setRotation(180);
+            arrow.setImageDrawable(context.getDrawable(R.drawable.ic_arrow_red));
+        } else {
+            arrow.setImageDrawable(context.getDrawable(R.drawable.ic_arrow));
+        }
+        rowView.setAlpha( (operation.paid) ? 0.5f : 1f);
 
         return rowView;
     }

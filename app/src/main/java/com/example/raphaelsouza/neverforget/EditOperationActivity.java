@@ -188,9 +188,11 @@ public class EditOperationActivity extends AppCompatActivity {
         if (view.getId() == R.id.isDebt) {
             isDebt = true;
             arrow.setRotation(180);
+            arrow.setImageDrawable(this.getDrawable(R.drawable.ic_arrow_red));
         } else {
             isDebt = false;
             arrow.setRotation(0);
+            arrow.setImageDrawable(this.getDrawable(R.drawable.ic_arrow));
         }
     }
 

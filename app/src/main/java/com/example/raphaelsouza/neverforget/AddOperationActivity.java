@@ -115,7 +115,10 @@ public class AddOperationActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                amountCell.setText("$"+charSequence.toString());
+                if (charSequence.toString().isEmpty())
+                    amountCell.setText("$");
+                else
+                    amountCell.setText(Utils.currency(Double.parseDouble(charSequence.toString())));
             }
 
             @Override
@@ -156,17 +159,16 @@ public class AddOperationActivity extends AppCompatActivity {
         when.setText(sdf.format(whenCalendar.getTime()));
     }
 
+
     public void setDebt(View view) {
         if (view.getId() == R.id.isDebt) {
             isDebt = true;
             arrow.setRotation(180);
-//            notDebit.setBackgroundColor(Color.argb(1,120,120,120));
-//            isDebt.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            arrow.setImageDrawable(this.getDrawable(R.drawable.ic_arrow_red));
         } else {
             isDebt = false;
             arrow.setRotation(0);
-//            isDebt.setBackgroundColor(Color.argb(1,120,120,120));
-//            notDebit.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            arrow.setImageDrawable(this.getDrawable(R.drawable.ic_arrow));
         }
     }
 
