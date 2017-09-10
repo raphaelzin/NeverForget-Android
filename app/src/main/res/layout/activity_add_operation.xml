@@ -30,6 +30,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:onClick="saveOperation"
-        app:srcCompat="@drawable/ic_done_24_dp" />
+        app:srcCompat="@drawable/ic_done" />
 
 </android.support.design.widget.CoordinatorLayout>
