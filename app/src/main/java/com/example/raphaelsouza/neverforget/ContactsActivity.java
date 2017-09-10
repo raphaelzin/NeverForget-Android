@@ -1,9 +1,10 @@
 package com.example.raphaelsouza.neverforget;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -12,6 +13,7 @@ public class ContactsActivity extends AppCompatActivity {
 
     ListView list;
     ContactsAdapter adapter;
+    ContactDAO contactDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +21,8 @@ public class ContactsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contacts);
         setTitle("Contacts");
 
-        adapter = new ContactsAdapter(this);
+        adapter    = new ContactsAdapter(this);
+        contactDAO = new ContactDAO();
         list = (ListView) findViewById(R.id.contactsList);
         list.setAdapter(adapter);
 
@@ -30,8 +33,38 @@ public class ContactsActivity extends AppCompatActivity {
                 showDetailsActivity(selected);
             }
         });
-    }
 
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapter, View view, int pos, long id) {
+                deleteContact(contactDAO.get(id));
+                return true;
+            }
+        });
+    }
+    public void deleteContact(final Contact contact) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(ContactsActivity.this);
+
+        alertDialog.setTitle("Delete Contact");
+        alertDialog.setMessage("Are you sure you want to delete the " +
+                "contact? This action cannot be undone");
+
+        alertDialog.setPositiveButton("Delete",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+                        contactDAO.delete(contact);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+        alertDialog.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        alertDialog.show();
+    }
 
     public void showDetailsActivity(Contact selected) {
         Intent detailsActivity = new Intent(this, ContactDetailsActivity.class);

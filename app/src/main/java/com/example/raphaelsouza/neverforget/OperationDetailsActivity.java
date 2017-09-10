@@ -135,6 +135,7 @@ public class OperationDetailsActivity extends AppCompatActivity {
     }
 
     public void setupView() {
+        contact = contactDAO.get(operation.contactID);
         descriptionDetails.setText(operation.details);
         if (operation.paid) {
             String paidAtLabel;
@@ -150,21 +151,28 @@ public class OperationDetailsActivity extends AppCompatActivity {
         amountDetails.setText(Utils.currency(operation.amount));
         whenDetails.setText(dateString(operation.date));
 
-        contactNameCell.setText(contact.getFirstName());
+
         selfNameCell.setText(selfDAO.getSelf().getFirstName());
         amountCell.setText(Utils.currency(operation.amount));
 
         if (selfDAO.getSelf().getImage() != null)
             selfPic.setImageBitmap(selfDAO.getSelf().getImage());
-        if (contact.getImage() != null)
-            contactPic.setImageBitmap(contact.getImage());
+
 
         if (operation.isDebt)
             arrow.setRotation(180);
 
+        if (contact != null) {
+            contactNameCell.setText(contact.getFirstName());
+            if (contact.getImage() != null)
+                contactPic.setImageBitmap(contact.getImage());
+        }
+
+
         toggle.setChecked(operation.paid);
         paidAtRow.setVisibility((operation.paid) ? View.VISIBLE : View.INVISIBLE);
     }
+
 
 
     public void showEditActivity() {

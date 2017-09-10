@@ -4,13 +4,11 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -23,8 +21,6 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static com.example.raphaelsouza.neverforget.R.id.fab;
 
 public class EditOperationActivity extends AppCompatActivity {
 
@@ -86,7 +82,19 @@ public class EditOperationActivity extends AppCompatActivity {
         isDebt = false;
 
         //Setting pre-defined fields
-        name.setText(contact.name);
+        if (contact != null) {
+            name.setText(contact.name);
+
+            contactName.setText(contact.getFirstName());
+            if (contact.getImage() != null) {
+                contactPic.setImageBitmap(contact.getImage());
+            }
+
+        } else {
+            contactName.setText("Someone");
+            name.setText("");
+        }
+
         desc.setText(operation.details);
         amount.setText("" + operation.amount);
 
@@ -101,10 +109,7 @@ public class EditOperationActivity extends AppCompatActivity {
             selfPic.setImageBitmap(selfDAO.getSelf().getImage());
         }
 
-        contactName.setText(contact.getFirstName());
-        if (contact.getImage() != null) {
-            contactPic.setImageBitmap(contact.getImage());
-        }
+
 
         amountCell.setText("$" + operation.amount);
 

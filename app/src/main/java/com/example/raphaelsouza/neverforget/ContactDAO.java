@@ -19,7 +19,10 @@ public class ContactDAO {
     }
 
     public Contact get(long id) {
-        return realm.where(Contact.class).equalTo("id", id).findFirst();
+        if (realm.where(Contact.class).equalTo("id", id).count() == 1)
+            return realm.where(Contact.class).equalTo("id", id).findFirst();
+        else
+            return null;
     }
 
     public Contact getByName(String name) {

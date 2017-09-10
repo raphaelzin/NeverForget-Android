@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static android.R.attr.id;
-
 /**
  * Created by Raphael on 8/17/2017.
  */
@@ -53,7 +51,8 @@ public class CompactOperationsAdapter extends BaseAdapter {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         Operation operation = (Operation) getItem(position);
-        Contact contact     = contactsDAO.get(operation.contactID);
+
+
 
 
         // Init views
@@ -70,8 +69,11 @@ public class CompactOperationsAdapter extends BaseAdapter {
             selfPic.setImageBitmap(selfDAO.getSelf().getImage());
         }
 
-        if (contact.getImage() != null ) {
-            contactPic.setImageBitmap(contact.getImage());
+        if (contactsDAO.get(operation.contactID) != null) {
+            Contact contact     = contactsDAO.get(operation.contactID);
+            if (contact.getImage() != null ) {
+                contactPic.setImageBitmap(contact.getImage());
+            }
         }
 
         amount.setText(Utils.currency(operation.amount));

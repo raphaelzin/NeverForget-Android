@@ -1,11 +1,6 @@
 package com.example.raphaelsouza.neverforget;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +50,10 @@ public class FullOperationsAdapter extends BaseAdapter {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         Operation operation = (Operation) getItem(position);
-        Contact contact     = contactsDAO.get(operation.contactID);
+
+
+
+
 
         // Init views
         View rowView = inflater.inflate(R.layout.full_operation_cell, parent, false);
@@ -70,14 +68,22 @@ public class FullOperationsAdapter extends BaseAdapter {
         ImageView arrow = (ImageView) rowView.findViewById(R.id.arrow);
         // Init END
 
+
+        if (contactsDAO.get(operation.contactID) != null) {
+            Contact contact     = contactsDAO.get(operation.contactID);
+            contactName.setText( contact.getFirstName() );
+            if (contact.getImage() != null ) {
+                contactPic.setImageBitmap(contact.getImage());
+            }
+        } else {
+            contactName.setText( "Someone" );
+        }
+
+
         if (selfDAO.getSelf().getImage() != null)
             selfPic.setImageBitmap(selfDAO.getSelf().getImage());
-
-        if (contact.getImage() != null )
-            contactPic.setImageBitmap(contact.getImage());
-
         selfName.setText(selfDAO.getSelf().getFirstName());
-        contactName.setText( contact.getFirstName() );
+
 
         amount.setText(Utils.currency(operation.amount));
         amount.setText(Utils.currency(operation.amount));
