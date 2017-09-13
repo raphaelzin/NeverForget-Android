@@ -199,10 +199,22 @@ public class EditOperationActivity extends AppCompatActivity {
             isDebt = true;
             arrow.setRotation(180);
             arrow.setImageDrawable(this.getDrawable(R.drawable.ic_arrow_red));
+
+            isDebtButton.setBackground(getDrawable(R.drawable.button));
+            notDebitButton.setBackground(getDrawable(R.drawable.button_unselect));
+
+            notDebitButton.setZ(1);
+            isDebtButton.setZ(2);
         } else {
             isDebt = false;
             arrow.setRotation(0);
             arrow.setImageDrawable(this.getDrawable(R.drawable.ic_arrow));
+
+            notDebitButton.setBackground(getDrawable(R.drawable.button));
+            isDebtButton.setBackground(getDrawable(R.drawable.button_unselect));
+
+            notDebitButton.setZ(2);
+            isDebtButton.setZ(1);
         }
     }
 

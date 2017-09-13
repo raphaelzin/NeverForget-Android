@@ -164,9 +164,12 @@ public class OperationDetailsActivity extends AppCompatActivity {
         if (selfDAO.getSelf().getImage() != null)
             selfPic.setImageBitmap(selfDAO.getSelf().getImage());
 
-
-        if (operation.isDebt)
+        if (operation.isDebt) {
             arrow.setRotation(180);
+            arrow.setImageDrawable(this.getDrawable(R.drawable.ic_arrow_red));
+        } else {
+            arrow.setImageDrawable(this.getDrawable(R.drawable.ic_arrow));
+        }
 
         if (contact != null) {
             contactNameCell.setText(contact.getFirstName());

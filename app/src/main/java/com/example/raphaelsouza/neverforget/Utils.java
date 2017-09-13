@@ -24,7 +24,7 @@ public class Utils {
     }
 
     static Bitmap getResizedBitmap(Bitmap image) {
-        int maxSize = 500;
+        int maxSize = 250;
         int width = image.getWidth();
         int height = image.getHeight();
 
