@@ -31,14 +31,23 @@
             android:name=".AddOperationActivity"
             android:label="@string/title_activity_add_operation"
             android:theme="@style/AppTheme.NoActionBar" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         <activity
             android:name=".ContactsActivity"
             android:screenOrientation="portrait" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         <activity
             android:screenOrientation="portrait"
             android:name=".OperationDetailsActivity"
             android:label="@string/title_activity_operation_details"
             android:theme="@style/AppTheme.NoActionBar" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         <activity
             android:name=".SettingsActivity"
             android:screenOrientation="portrait" />
