@@ -113,6 +113,8 @@ public class AddOperationActivity extends AppCompatActivity {
                 if(contDAO.getByName(charSequence.toString()) != null) {
                     contactPic.setImageBitmap(contDAO
                             .getByName(charSequence.toString()).getImage());
+                } else {
+                    contactPic.setImageDrawable(getDrawable(R.drawable.ic_account_circle));
                 }
             }
 
