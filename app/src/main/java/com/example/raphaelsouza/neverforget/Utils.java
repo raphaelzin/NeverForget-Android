@@ -17,12 +17,6 @@ public class Utils {
         return amountString;
     }
 
-    static String currency(String amount) {
-        NumberFormat in = NumberFormat.getCurrencyInstance();
-        amount = in.format(amount);
-        return amount;
-    }
-
     static Bitmap getResizedBitmap(Bitmap image) {
         int maxSize = 250;
         int width = image.getWidth();
@@ -36,7 +30,6 @@ public class Utils {
             height = maxSize;
             width = (int) (height * bitmapRatio);
         }
-
         return Bitmap.createScaledBitmap(image, width, height, true);
     }
 }

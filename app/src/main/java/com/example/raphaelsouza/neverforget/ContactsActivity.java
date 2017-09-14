@@ -21,7 +21,7 @@ public class ContactsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
-        setTitle("Contacts");
+        setTitle(getString(R.string.contacts));
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
@@ -51,18 +51,17 @@ public class ContactsActivity extends AppCompatActivity {
     public void deleteContact(final Contact contact) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(ContactsActivity.this);
 
-        alertDialog.setTitle("Delete Contact");
-        alertDialog.setMessage("Are you sure you want to delete the " +
-                "contact? This action cannot be undone");
+        alertDialog.setTitle(getString(R.string.delete_contact_header));
+        alertDialog.setMessage(getString(R.string.delete_contact));
 
-        alertDialog.setPositiveButton("Delete",
+        alertDialog.setPositiveButton(getString(R.string.delete),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int which) {
                         contactDAO.delete(contact);
                         adapter.notifyDataSetChanged();
                     }
                 });
-        alertDialog.setNegativeButton("Cancel",
+        alertDialog.setNegativeButton(getString(R.string.cancel),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();

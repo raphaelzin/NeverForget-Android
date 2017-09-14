@@ -132,21 +132,21 @@ public class ContactDetailsActivity extends AppCompatActivity {
         Log.wtf("Tag", "Edit Name" );
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(ContactDetailsActivity.this);
 
-        alertDialog.setTitle("Change Name");
-        alertDialog.setMessage("Enter contact's new name");
+        alertDialog.setTitle(getString(R.string.change_name));
+        alertDialog.setMessage(getString(R.string.new_contact_name));
         final EditText input = new EditText(this);
         input.setText(contact.name);
         input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
         alertDialog.setView(input);
 
-        alertDialog.setPositiveButton("Change",
+        alertDialog.setPositiveButton(getString(R.string.change),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int which) {
                         contactName.setText(input.getText().toString());
                         contactDAO.updateName(contact, input.getText().toString());
                     }
                 });
-        alertDialog.setNegativeButton("Cancel",
+        alertDialog.setNegativeButton(getString(R.string.cancel),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();

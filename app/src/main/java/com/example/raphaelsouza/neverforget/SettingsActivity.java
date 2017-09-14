@@ -41,7 +41,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        setTitle("Settings");
+        setTitle(getString(R.string.settings));
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
@@ -129,13 +129,13 @@ public class SettingsActivity extends AppCompatActivity {
         Log.wtf("Tag", "Edit Name" );
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(SettingsActivity.this);
 
-        alertDialog.setTitle("Change Name");
-        alertDialog.setMessage("Enter your new name");
+        alertDialog.setTitle(getString(R.string.change_name));
+        alertDialog.setMessage(getString(R.string.new_name));
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
         alertDialog.setView(input);
 
-        alertDialog.setPositiveButton("Change",
+        alertDialog.setPositiveButton(getString(R.string.change),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int which) {
                         selfDAO.updateSelfName(input.getText().toString());
@@ -143,7 +143,7 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                 });
 
-        alertDialog.setNegativeButton("Cancel",
+        alertDialog.setNegativeButton(getString(R.string.cancel),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();

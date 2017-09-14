@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">NeverForget</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_add_operation">AddOperation</string>
+    <string name="title_activity_operation_details">OperationDetails</string>
+    <string name="title_activity_contact_details">ContactDetailsActivity</string>
+    <string name="title_activity_edit_operation">EditOperationActivity</string>
+
+    <string name="delete_operation_header">Deletar Operação</string>
+    <string name="delete_operation">Tem certeza que você quer deletar essa operação? Essa ação não pode ser desfeita</string>
+
+    <string name="main_title">Never Forget</string>
+    
+    <string name="add">Adicionar</string>
+    <string name="full_name">Primeiro e último nome</string>
+    <string name="amount">Valor</string>
+    <string name="details">Detalhes</string>
+    <string name="when">Quando</string>
+    <string name="borrowing">Recebendo</string>
+    <string name="lending">Emprestando</string>
+    <string name="save_problem_header">Opa, há um problema</string>
+    <string name="save_problem">Os campos Valor e Nome tem que estar preenchidos</string>
+    <string name="gotIt">Entendi</string>
+
+    <string name="someone">Alguém</string>
+    <string name="you">Você</string>
+
+    <string name="settings">Perfil</string>
+    <string name="credit">Crédito</string>
+    <string name="debt">Débito</string>
+    <string name="total">Total</string>
+    <string name="change_name">Mudar Nome</string>
+    <string name="new_name">Ponha seu novo nome</string>
+
+    <string name="contacts">Contatos</string>
+    <string name="delete_contact_header">Deletar contato</string>
+    <string name="delete_contact">Tem certeza que você quer deletar esse contato? Essa ação não pode ser desfeita</string>
+    <string name="new_contact_name">Ponha o nome novo</string>
+
+    <string name="delete">Deletar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="change">Mudar</string>
+
+    <string name="set_paid_date">Definir data</string>
+
+    <string name="is_it_paid">Está pago?</string>
+    <string name="paid_at">Pago em</string>
+    <string name="no">Não</string>
+    <string name="yes">Sim</string>
+
+    <string name="edit">Editar</string>
+
+</resources>

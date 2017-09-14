@@ -58,7 +58,7 @@ public class EditOperationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_operation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("Edit");
+        setTitle(getString(R.string.edit));
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
@@ -96,7 +96,7 @@ public class EditOperationActivity extends AppCompatActivity {
             }
 
         } else {
-            contactName.setText("Someone");
+            contactName.setText(getString(R.string.someone));
             name.setText("");
         }
 
@@ -231,9 +231,9 @@ public class EditOperationActivity extends AppCompatActivity {
 
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("The fields amount and name have to be filled")
-                    .setTitle("Ops, there's a problem");
-            builder.setPositiveButton("Got it", new DialogInterface.OnClickListener() {
+            builder.setMessage(getString(R.string.save_problem))
+                    .setTitle(getString(R.string.save_problem_header));
+            builder.setPositiveButton(getString(R.string.gotIt), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) { }
             });
             AlertDialog dialog = builder.create();

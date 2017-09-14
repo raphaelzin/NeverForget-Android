@@ -33,7 +33,7 @@
         android:textSize="29sp"
         android:layout_below="@id/selfPicture"
         android:gravity="center"
-        android:text="User Name" />
+        android:text="@string/you" />
 
     <ImageButton
         android:id="@+id/changeName"
@@ -64,7 +64,7 @@
                 android:textColor="@color/colorContent"
                 android:textSize="26sp"
                 android:layout_weight="1"
-                android:text="Credit"/>
+                android:text="@string/credit"/>
 
             <TextView
                 android:id="@+id/credit"
@@ -90,7 +90,7 @@
                 android:textColor="@color/colorContent"
                 android:textSize="26sp"
                 android:layout_weight="1"
-                android:text="Debt"/>
+                android:text="@string/debt"/>
 
             <TextView
                 android:id="@+id/debt"
@@ -116,7 +116,7 @@
                 android:textColor="@color/colorContent"
                 android:textSize="26sp"
                 android:layout_weight="1"
-                android:text="Total"/>
+                android:text="@string/total"/>
 
             <TextView
                 android:id="@+id/total"

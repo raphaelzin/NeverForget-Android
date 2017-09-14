@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("Never Forget");
+        setTitle(getResources().getString(R.string.main_title));
 
         operationDAO = new OperationDAO();
 
@@ -73,18 +73,17 @@ public class MainActivity extends AppCompatActivity {
     public void deleteOperation(final Operation operation) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
 
-        alertDialog.setTitle("Delete Operation");
-        alertDialog.setMessage("Are you sure you want to delete the " +
-                "operation? This action cannot be undone");
+        alertDialog.setTitle(getString(R.string.delete_operation_header));
+        alertDialog.setMessage(getString(R.string.delete_operation));
 
-        alertDialog.setPositiveButton("Delete",
+        alertDialog.setPositiveButton(getString(R.string.delete),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int which) {
                         operationDAO.delete(operation);
                         adapter.notifyDataSetChanged();
                     }
                 });
-        alertDialog.setNegativeButton("Cancel",
+        alertDialog.setNegativeButton(getString(R.string.cancel),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();

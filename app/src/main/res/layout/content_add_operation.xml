@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:capitalize="words"
-            android:hint="First and Last name" />
+            android:hint="@string/full_name" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -59,7 +59,7 @@
             android:inputType="numberDecimal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Amount" />
+            android:hint="@string/amount" />
 
 
     </android.support.design.widget.TextInputLayout>
@@ -80,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:capitalize="sentences"
-            android:hint="Description" />
+            android:hint="@string/details" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -102,7 +102,7 @@
         android:layout_marginTop="4dp"
         android:clickable="true"
         android:focusable="false"
-        android:hint="When" />
+        android:hint="@string/when" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -122,7 +122,7 @@
             android:layout_weight="5"
             android:layout_marginRight="-5dp"
             android:onClick="setDebt"
-            android:text="Borrowing" />
+            android:text="@string/borrowing" />
 
         <Button
             android:background="@drawable/button"
@@ -133,7 +133,7 @@
             android:layout_weight="5"
             android:layout_marginLeft="-5dp"
             android:onClick="setDebt"
-            android:text="Lending" />
+            android:text="@string/lending" />
 
     </LinearLayout>
     </LinearLayout>

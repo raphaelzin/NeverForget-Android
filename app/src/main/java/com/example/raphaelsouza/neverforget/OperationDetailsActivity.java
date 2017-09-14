@@ -58,7 +58,7 @@ public class OperationDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_operation_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("Details");
+        setTitle(getString(R.string.details));
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
@@ -99,7 +99,7 @@ public class OperationDetailsActivity extends AppCompatActivity {
                 paidAtRow.setVisibility((operation.paid) ? View.VISIBLE : View.INVISIBLE);
 
                 SpannableString content = new SpannableString((operation.paidDate != null) ?
-                        dateString(operation.paidDate): "Set Paid Date");
+                        dateString(operation.paidDate): getString(R.string.set_paid_date));
                 content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
                 paidAtDetails.setText(content);
             }
@@ -148,7 +148,7 @@ public class OperationDetailsActivity extends AppCompatActivity {
             if (operation.paidDate != null)
                 paidAtLabel = dateString(operation.paidDate);
             else
-                paidAtLabel = "Set Paid Date";
+                paidAtLabel = getString(R.string.set_paid_date);
             SpannableString paid = new SpannableString(paidAtLabel);
             paid.setSpan(new UnderlineSpan(), 0, paid.length(), 0);
             paidAtDetails.setText(paid);

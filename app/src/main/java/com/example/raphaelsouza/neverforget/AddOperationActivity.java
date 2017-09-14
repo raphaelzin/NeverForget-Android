@@ -65,7 +65,7 @@ public class AddOperationActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        setTitle("Add");
+        setTitle(getString(R.string.add));
 
         opDAO   = new OperationDAO();
         contDAO = new ContactDAO();
@@ -200,9 +200,9 @@ public class AddOperationActivity extends AppCompatActivity {
     public void saveOperation() {
         if (name.getText().toString().isEmpty() || amount.getText().toString().isEmpty()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("The fields amount and name have to be filled")
-                    .setTitle("Ops, there's a problem");
-            builder.setPositiveButton("Got it", new DialogInterface.OnClickListener() {
+            builder.setMessage(getString(R.string.save_problem))
+                    .setTitle(getString(R.string.save_problem_header));
+            builder.setPositiveButton(getString(R.string.gotIt), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) { }
             });
             AlertDialog dialog = builder.create();
