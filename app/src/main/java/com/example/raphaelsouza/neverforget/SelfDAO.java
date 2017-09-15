@@ -1,5 +1,6 @@
 package com.example.raphaelsouza.neverforget;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 
 import io.realm.Realm;
@@ -9,18 +10,20 @@ import io.realm.Realm;
  */
 
 public class SelfDAO {
-    Realm realm = Realm.getDefaultInstance();
+    private Realm realm = Realm.getDefaultInstance();
+    private Self self;
 
     public SelfDAO() {
         if (realm.where(Contact.class).count() == 0)  {
             realm.beginTransaction();
-            realm.copyToRealm(new Self("You"));
+            realm.copyToRealm(new Self(Resources.getSystem().getString(R.string.you)));
             realm.commitTransaction();
         }
+        self = realm.where(Self.class).findFirst();
     }
 
     public Self getSelf() {
-        return realm.where(Self.class).findFirst();
+        return self;
     }
 
     public void updateSelfName(String name) {

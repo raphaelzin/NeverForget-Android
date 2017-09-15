@@ -1,6 +1,9 @@
 package com.example.raphaelsouza.neverforget;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.support.v4.graphics.BitmapCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,9 +77,10 @@ public class FullOperationsAdapter extends BaseAdapter {
             contactName.setText( contact.getFirstName() );
             if (contact.getImage() != null ) {
                 contactPic.setImageBitmap(contact.getImage());
+                Log.wtf(contact.getFirstName() + "Image size:",""+ BitmapCompat.getAllocationByteCount(Utils.compressBitmap(contact.getImage())) );
             }
         } else {
-            contactName.setText( "Someone" );
+            contactName.setText( Resources.getSystem().getString(R.string.someone) );
         }
 
 
@@ -95,6 +99,8 @@ public class FullOperationsAdapter extends BaseAdapter {
         } else {
             arrow.setImageDrawable(context.getDrawable(R.drawable.ic_arrow));
         }
+
+
 
 
         rowView.setAlpha( (operation.paid) ? 0.5f : 1f);

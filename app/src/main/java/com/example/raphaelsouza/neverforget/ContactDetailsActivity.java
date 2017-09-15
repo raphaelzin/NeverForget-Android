@@ -177,6 +177,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 Bitmap bm = MediaStore.Images
                         .Media.getBitmap(this.getContentResolver(), Crop.getOutput(result));
                 bm = Utils.getResizedBitmap(bm);
+                bm = Utils.compressBitmap(bm);
                 contactDAO.updatePicture(contact, bm);
                 contactPicture.setImageBitmap(Utils.getResizedBitmap(bm));
             } catch  (IOException e) {
