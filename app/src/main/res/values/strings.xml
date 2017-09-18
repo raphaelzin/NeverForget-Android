@@ -50,4 +50,7 @@
 
     <string name="edit">Edit</string>
 
+    <string name="debt_overview">You borrowed %2$s from %1$s</string>
+    <string name="credit_overview">You lent %2$s to %1$s</string>
+
 </resources>

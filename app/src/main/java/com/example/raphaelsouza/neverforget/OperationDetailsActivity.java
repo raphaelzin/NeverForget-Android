@@ -37,6 +37,7 @@ public class OperationDetailsActivity extends AppCompatActivity {
     TextView descriptionDetails;
     TextView whenDetails;
     TextView amountDetails;
+    TextView overview;
 
     TextView selfNameCell;
     TextView contactNameCell;
@@ -77,6 +78,7 @@ public class OperationDetailsActivity extends AppCompatActivity {
         paidAtDetails      = (TextView) findViewById(R.id.paidAtDetails);
         amountDetails      = (TextView) findViewById(R.id.amountDetails);
         whenDetails        = (TextView) findViewById(R.id.whenDetails);
+        overview           = (TextView) findViewById(R.id.overview);
 
         contactNameCell    = (TextView) findViewById(R.id.contactName);
         selfNameCell       = (TextView) findViewById(R.id.selfName);
@@ -154,6 +156,7 @@ public class OperationDetailsActivity extends AppCompatActivity {
             paidAtDetails.setText(paid);
         }
 
+
         amountDetails.setText(Utils.currency(operation.amount));
         whenDetails.setText(dateString(operation.date));
 
@@ -167,8 +170,12 @@ public class OperationDetailsActivity extends AppCompatActivity {
         if (operation.isDebt) {
             arrow.setRotation(180);
             arrow.setImageDrawable(this.getDrawable(R.drawable.ic_arrow_red));
+            overview.setText(String.format(getResources().getString(R.string.debt_overview),
+                    contact.getFirstName(), Utils.currency(operation.amount)));
         } else {
             arrow.setImageDrawable(this.getDrawable(R.drawable.ic_arrow));
+            overview.setText(String.format(getResources().getString(R.string.credit_overview),
+                    contact.getFirstName(), Utils.currency(operation.amount)));
         }
 
         if (contact != null) {
