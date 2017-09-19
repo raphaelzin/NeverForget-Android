@@ -173,6 +173,7 @@ public class OperationDetailsActivity extends AppCompatActivity {
             overview.setText(String.format(getResources().getString(R.string.debt_overview),
                     contact.getFirstName(), Utils.currency(operation.amount)));
         } else {
+            arrow.setRotation(0);
             arrow.setImageDrawable(this.getDrawable(R.drawable.ic_arrow));
             overview.setText(String.format(getResources().getString(R.string.credit_overview),
                     contact.getFirstName(), Utils.currency(operation.amount)));

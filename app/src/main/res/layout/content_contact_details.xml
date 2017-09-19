@@ -61,14 +61,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="start"
-            android:textSize="23sp"
+            android:textSize="18sp"
             android:text="$"/>
         <TextView
             android:id="@+id/overall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="23sp"
+            android:textSize="18sp"
             android:layout_weight="1"
             android:text="$"/>
         <TextView
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="end"
-            android:textSize="23sp"
+            android:textSize="18sp"
             android:layout_weight="1"
             android:text="$"/>
     </LinearLayout>

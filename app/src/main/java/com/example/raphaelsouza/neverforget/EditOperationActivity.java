@@ -24,6 +24,8 @@ import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.example.raphaelsouza.neverforget.R.id.overview;
+
 public class EditOperationActivity extends AppCompatActivity {
 
     EditText name;
@@ -118,8 +120,16 @@ public class EditOperationActivity extends AppCompatActivity {
 
         amountCell.setText("$" + operation.amount);
 
-        if (operation.isDebt)
+        if (operation.isDebt) {
             arrow.setRotation(180);
+            arrow.setImageDrawable(this.getDrawable(R.drawable.ic_arrow_red));
+            isDebtButton.setBackground(getDrawable(R.drawable.button));
+            notDebitButton.setBackground(getDrawable(R.drawable.button_unselect));
+        } else {
+            arrow.setImageDrawable(this.getDrawable(R.drawable.ic_arrow));
+            notDebitButton.setBackground(getDrawable(R.drawable.button));
+            isDebtButton.setBackground(getDrawable(R.drawable.button_unselect));
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
